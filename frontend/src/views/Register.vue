@@ -46,7 +46,7 @@ export default {
 .register-sub {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 70%;
 }
 .skate-img {
   width: 100%;

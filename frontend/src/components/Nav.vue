@@ -3,8 +3,8 @@
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
             <div class="right-side">
-                <a href="#">Products</a>
-                <a href="">Register</a>
+                <a href="/Products">Products</a>
+                <a href="/">Register</a>
                 <button>hello</button>
                 <button>hello</button>
             </div>
@@ -26,6 +26,12 @@ img {
 .nav-bar {
     display: flex;
     justify-content: space-between;
+}
+a {
+    margin: 2px;
+}
+button {
+    margin: 2px;
 }
 
 </style>
