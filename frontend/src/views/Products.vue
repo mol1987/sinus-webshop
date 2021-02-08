@@ -9,9 +9,6 @@
                 <product-card/>
                 <product-card/>
                 <product-card/>
-                <product-card/>
-                <product-card/>
-                <product-card/>
             </div>
         </div>
     </div>
@@ -34,6 +31,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: lightgrey;
 }
 .body {
   display: flex;

@@ -25,9 +25,6 @@
 
 <script>
 import Nav from '@/components/Nav.vue'
-// @ is an alias to /src
-
-
 
 export default {
   name: 'Register',
