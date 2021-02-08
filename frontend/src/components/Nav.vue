@@ -5,8 +5,8 @@
             <div class="right-side">
                 <router-link to="/Products">Products</router-link>
                 <router-link to="/">Register</router-link>
-                <button>hello</button>
-                <button>hello</button>
+                <img id="login" src="@/assets/icons8-customer-64.png">
+                <img id="cart" src="@/assets/icon-bag-white.svg">
             </div>
         </div>
     </div>
@@ -32,6 +32,19 @@ a {
 }
 button {
     margin: 2px;
+}
+#login {
+    height: 25px;
+    width: 25px;
+    background-color: grey;
+    border-radius: 50px;
+    margin: 2px;
+}
+#cart {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50px;
 }
 
 </style>
