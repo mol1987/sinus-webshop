@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Register from '../views/Register.vue'
+import Admin from '../views/Admin.vue'
+import AdminProducts from '../views/AdminProducts.vue'
+import BuyView from '../views/BuyView.vue'
+import MakeOrder from '../views/MakeOrder.vue'
+import OrderDone from '../views/OrderDone.vue'
+import Products from '../views/Products.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -33,12 +40,12 @@ const routes = [
   {
     path: '/OrderDone',
     name: 'OrderDone',
-    component: MakeOrder
+    component: OrderDone
   },
   {
     path: '/Products',
     name: 'Products',
-    component: Profile
+    component: Products
   },
 
   {
