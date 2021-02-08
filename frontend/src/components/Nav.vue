@@ -3,8 +3,8 @@
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
             <div class="right-side">
-                <a href="/Products">Products</a>
-                <a href="/">Register</a>
+                <router-link to="/Products">Products</router-link>
+                <router-link to="/">Register</router-link>
                 <button>hello</button>
                 <button>hello</button>
             </div>
