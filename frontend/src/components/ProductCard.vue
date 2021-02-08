@@ -67,6 +67,9 @@ label {
     float: left;
     font-size: 12px;
 }
+#picture-container {
+    position: relative;
+}
 #price {
     background-color: black;
     color: white;
@@ -74,9 +77,9 @@ label {
     width: 6rem;
     border: 2px;
     border-radius: 25px;
-    position: absolute;
-    top: 50%;
-    left: 35%;
+  position: absolute;
+  bottom: 2%;
+  left: 35%;
     transform: translate(-50%, -50%);
 }
 </style>

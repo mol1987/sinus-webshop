@@ -4,11 +4,6 @@
             <Nav/>
             <div class="product-container">
                 <product-card/>
-                <product-card/>
-                <product-card/>
-                <product-card/>
-                <product-card/>
-                <product-card/>
             </div>
         </div>
     </div>
@@ -42,6 +37,11 @@ export default {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: auto auto auto;
+}
 
+@media only screen and (max-width: 34px) {
+  .products {
+    width: 50%;
+  }
 }
 </style>
