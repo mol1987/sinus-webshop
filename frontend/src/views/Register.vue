@@ -20,8 +20,7 @@
       </form>
     </div>
     </div>
-    <hr>
-    <product-view/>
+    <!-- <Product-view/> -->
   </div>
 </template>
 
@@ -33,8 +32,7 @@ import Nav from '@/components/Nav.vue'
 export default {
   name: 'Register',
   components: {
-    Nav,
-    ProductView
+    Nav
   }
 }
 </script>
