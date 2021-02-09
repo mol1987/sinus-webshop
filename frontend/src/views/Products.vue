@@ -3,6 +3,9 @@
         <div class="body">
             <Nav/>
             <div class="product-container">
+                <!-- <product-card @click.native="@/components/ProductView.vue"/> -->
+                <product-card/>
+                <product-card/>
                 <product-card/>
             </div>
         </div>

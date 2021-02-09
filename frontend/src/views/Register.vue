@@ -20,16 +20,20 @@
       </form>
     </div>
     </div>
+    <hr>
+    <product-view/>
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
+import ProductView from '../components/ProductView.vue'
 
 export default {
   name: 'Register',
   components: {
-    Nav
+    Nav,
+    ProductView
   }
 }
 </script>

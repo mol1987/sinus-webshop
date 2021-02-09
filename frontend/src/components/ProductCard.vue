@@ -82,4 +82,9 @@ label {
   left: 35%;
     transform: translate(-50%, -50%);
 }
+#icon {
+    background-color: lightgrey;
+    border-radius: 50px;
+    margin-right: 2px;
+}
 </style>
