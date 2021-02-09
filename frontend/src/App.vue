@@ -6,6 +6,7 @@
 
 <style lang="scss">
 @import '@/styles/setup/_normalize';
+
 #app {
   display: flex;
   flex-direction: column;

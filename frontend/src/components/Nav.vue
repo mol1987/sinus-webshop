@@ -3,10 +3,10 @@
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
             <div class="right-side">
-                <a href="#">Products</a>
-                <a href="">Register</a>
-                <button>hello</button>
-                <button>hello</button>
+                <router-link to="/Products">Products</router-link>
+                <router-link to="/">Register</router-link>
+                <img id="login" src="@/assets/icons8-customer-64.png">
+                <img id="cart" src="@/assets/icon-bag-white.svg">
             </div>
         </div>
     </div>
@@ -29,6 +29,25 @@ img {
 .nav-bar {
     display: flex;
     justify-content: space-between;
+}
+a {
+    margin: 2px;
+}
+button {
+    margin: 2px;
+}
+#login {
+    height: 25px;
+    width: 25px;
+    background-color: grey;
+    border-radius: 50px;
+    margin: 2px;
+}
+#cart {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50px;
 }
 
 </style>
