@@ -28,7 +28,6 @@ import Nav from '@/components/Nav.vue'
 // @ is an alias to /src
 
 
-
 export default {
   name: 'Register',
   components: {
@@ -46,7 +45,6 @@ export default {
 .register-sub {
   display: flex;
   flex-direction: column;
-  width: 50%;
 }
 .skate-img {
   width: 100%;

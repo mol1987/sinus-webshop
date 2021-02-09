@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.Nav {
+    width: 100%;
+}
 img {
     height: 50px;
     width: 50px;
