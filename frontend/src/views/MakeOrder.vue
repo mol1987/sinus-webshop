@@ -12,7 +12,8 @@
                                <div class="product-item">
                                     <div class="left">
                                         <div class="img-board">
-                                            <img src="~@/assets/skateboard-greta.png">
+                                             <!-- <img :src="getImage(item.imgFile)"> -->
+                                             <img :src="getImage(item.imgFile)" :alt="tom">
                                         </div>
                                         <div class="text-two-part">
                                             <h3>Gretas Fury</h3>
@@ -103,6 +104,12 @@ export default {
                 imgFile: 'skateboard-greta.png' // Asset logic on clientside
             } 
             ]
+        }
+    },
+    methods: {
+        getImage(path) {
+            
+              return require(`../assets/${path}`)
         }
     }
 }

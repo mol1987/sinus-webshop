@@ -3,10 +3,13 @@
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
             <div class="right-side">
-                <router-link to="/Products">Products</router-link>
-                <router-link to="/">Register</router-link>
+                <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
+                <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register</router-link>
                 <img id="login" src="@/assets/icons8-customer-64.png">
-                <img id="cart" src="@/assets/icon-bag-white.svg">
+                <div class="cart-section">
+                    <img id="cart" src="@/assets/icon-bag-white.svg">
+                    <div class="circle-number"><p>{{cartItemAmount}}</p></div>
+                </div>
             </div>
         </div>
     </div>
@@ -14,21 +17,51 @@
 
 <script>
 export default {
-    name: "Nav"
+    name: "Nav",
+    data() { return {
+    }},
+    computed: {
+        cartItemAmount() {
+            return 2
+        }
+    },
+    methods: {
+        flagActivated(routeName) {
+            if (routeName == this.$router.currentRoute.path) return true
+            return false
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
+.activated {
+    font-weight: 700;
+}
+
+
 .Nav {
     width: 100%;
 }
-img {
-    height: 50px;
-    width: 50px;
-}
+
+.right-side {
+        display: flex;
+        justify-content: space-evenly;
+        justify-items: center;
+        align-items: center;
+        width: 15rem;
+    }
+
 .nav-bar {
     display: flex;
     justify-content: space-between;
+    height: 50px;
+    >img {
+    height: 100%;
+    width: 100px;
+
+    
+}
 }
 a {
     margin: 2px;
@@ -48,6 +81,30 @@ button {
     width: 25px;
     background-color: red;
     border-radius: 50px;
+}
+
+.cart-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .circle-number {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        position: absolute;
+        background-color: white;
+        width: 15px;
+        height: 15px;
+        border-radius: 50px;
+        margin-left: 18px;
+        margin-bottom: 20px;
+        >p {
+            font-size: 10px;
+        }
+    }
 }
 
 </style>
