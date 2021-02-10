@@ -1,31 +1,35 @@
 <template>
-    <div class="product-vue">
-        <div class="fade-layer">
-            <div class="content">
-                <div id="product-picture">
-                    <slot name="img-file"/>
-                </div>
-                <div id="body">
-                    <div id="header">
-                        <slot name="header"/>
+    <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+                <div class="content">
+                    <div id="product-picture">
+                        <slot name="img-file"/>
                     </div>
-                    <div id="short-desc">
-                        <slot name="short-desc"/>
-                    </div>
-                    <div id="long-desc">
-                        <slot name="long-desc" />
-                    </div>
-                    <div id="price">
-                        <slot name="price"/>
-                    </div>
-                    <div id="button-div">
-                        <img src="@/assets/icon-bag-white.svg">
-                        <label id="order-label">Order now</label>
+                    <div id="body">
+                        <div id="header">
+                            <slot name="header"/>
+                        </div>
+                        <div id="short-desc">
+                            <slot name="short-desc"/>
+                        </div>
+                        <div id="long-desc">
+                            <slot name="long-desc" />
+                        </div>
+                        <div id="price">
+                            <slot name="price"/>
+                        </div>
+                        <div id="button-div">
+                            <img src="@/assets/icon-bag-white.svg">
+                            <label id="order-label">Order now</label>
+                        </div>
                     </div>
                 </div>
             </div>
+          </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -44,7 +48,7 @@ export default {
         align-self: flex-end;
     }
     #body {
-        padding: 10%;
+        padding: 25%;
         align-self: center;
         background-color: white;
         #header {
@@ -76,28 +80,31 @@ export default {
         margin-right: 8px;
     }
 }
-// .fade-layer {
-//     position: fixed;
-//     top: 0; left: 0; bottom: 0; right: 0;
-//     background-color: rgba(0,0,0,0.25);
-//     transition: opacity 0.25s;
-//     pointer-events: none;
-//     opacity: 0;
-// }
-// .fade-layer.show {
-//     pointer-events: all;
-//     opacity: 1;
-// }
-// .content {
-//     padding: 2rem;
-//     transition: opacity 0.25s;
-//     opacity: 0;
-//     position: fixed;
-//     left: 50%;
-//     top: 50%;
-//     transform: translate(-50%, -50%);
-// }
-// .content.show {
-//     opacity: 1;
-// }
+
+// *** To make modal component
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: table;
+//   transition: opacity 0.3s ease;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.content {
+  width: auto;
+  max-width: 600px;
+  margin: 0px auto;
+  padding: 0px 30px;
+  background-color: rgba(247, 243, 243, 0.959);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+}
 </style>
