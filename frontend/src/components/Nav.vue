@@ -2,7 +2,7 @@
     <div class="Nav">
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
-            <div class="right-side">
+            <div class="right-side" v-if="NavBarStateUser">
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
                 <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register</router-link>
                 <img id="login" src="@/assets/icons8-customer-64.png">
@@ -11,6 +11,11 @@
                     <div class="circle-number"><p>{{cartItemAmount}}</p></div>
                 </div>
             </div>
+            <div class="right-side" v-if="NavBarStateAdmin">
+                <router-link to="/AdminProducts" v-bind:class="{activated: flagActivated('/AdminProducts')}">Admin Products</router-link>
+                <router-link to="/Admin" v-bind:class="{activated: flagActivated('/admin')}">Orders</router-link>
+                <a href="#">My Account</a>
+            </div>
         </div>
     </div>
 </template>
@@ -18,11 +23,21 @@
 <script>
 export default {
     name: "Nav",
+    props: ["navBarState"],
     data() { return {
     }},
     computed: {
         cartItemAmount() {
             return 2
+        },
+        NavBarStateAdmin() {
+            if (this.navBarState == 'admin') return true
+            return false
+        },
+        NavBarStateUser() {
+            if (this.navBarState == 'user') return true
+            if (this.navBarState == null) return true
+            return false
         }
     },
     methods: {
