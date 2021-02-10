@@ -1,4 +1,7 @@
+// *** This component is a product card template. This model is uses in the Product component
+
 <template>
+    <!-- *** Click event emits to Product.vue (parent) clicked-card event *** -->
     <div class="card" @click="$emit('clicked-card')">
         <div id="top">
             <h4 id="header">{{products[0].title}}</h4>
@@ -14,21 +17,17 @@
 </template>
 
 <script>
+// *** Import Products from database json file *** 
 import Products from '/database/productsSeed.json'
 
-    export default {
-        name: 'ProductCard',
-        data() {
-            return {
-                products: Products
-            }
-        },
-        // methods: {
-        //     getImage() {   
-        //         return this.products[0].imgFile
-        //     },
-        // }
-    }
+export default {
+    name: 'ProductCard',
+    data() {
+        return {
+            products: Products
+        }
+    },
+}
 </script>
 
 <style lang="scss" scoped>

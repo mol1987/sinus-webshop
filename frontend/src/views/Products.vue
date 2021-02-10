@@ -1,12 +1,17 @@
+// *** Products template for all products in the store. 
+
 <template>
     <div class="products">
             <Nav/>
-          <div class="body">
+          <div class="body"> 
+            
+            <!-- *** For each object in products display product-card component *** -->
             <div class="product-container" v-for="product in products" :key="product.id">
                 <product-card v-on:clicked-card="currentProduct = product" id="product-card"/>
-   
             </div>
-            <product-view v-if="currentProduct">
+
+            <!-- *** This is product-view template which uses in the slots of ProductView modal component *** -->
+            <product-view v-if="currentProduct" v-on:close="closePopup">
                   <template v-slot:img-file>
                     <img :src="getImage(currentProduct.imgFile)">
                   </template>
@@ -47,9 +52,14 @@ export default {
     }
   },
   methods: {
+    // Just get an image from the assets. Should be reassigned by the fetch or axios later on.
     getImage(path) {          
       return require(`../assets/${path}`)
-    }    
+    },
+    // Closing the modal component. May fix it without close button later.
+    closePopup() {
+      this.currentProduct = null
+    },
   },
 }
 </script>

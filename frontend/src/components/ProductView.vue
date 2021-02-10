@@ -1,7 +1,13 @@
+// *** This is modal component. It is a child component to Products.vue. 
+
 <template>
     <transition name="modal">
         <div class="modal-mask">
             <div class="modal-wrapper">
+                <!-- *** Close popup button *** -->
+                <button id="closeBtn" @click="$emit('close')">X</button>
+
+                <!-- *** Content accepts data and template from its parent Products.vue via slots *** -->
                 <div class="content">
                     <div id="product-picture">
                         <slot name="img-file"/>
@@ -78,7 +84,7 @@ export default {
     }
 }
 
-// *** To make modal component
+// *** Styling to make modal component as a popup 
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -92,6 +98,12 @@ export default {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+  #closeBtn {
+      height: 25px;
+      width: 25px;
+      background-color: red;
+      color: white;
+  }
 }
 .content {
   width: auto;
