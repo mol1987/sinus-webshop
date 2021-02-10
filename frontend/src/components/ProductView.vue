@@ -1,26 +1,20 @@
 <template>
     <div class="product-vue">
-        <div id="product-picture">
-            <slot name="item-img">
-             <img src="@/assets/skateboard-greta.png">
-            </slot>
-        </div>
-        <div id="body">
-            <slot name="header3">
-                <h3>Greta Fury</h3>
-            </slot> 
-            <slot name="label">
-                <label>Unisex</label>
-            </slot>
-            <slot name="paragraph">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis sapiente deleniti excepturi mollitia, explicabo voluptate accusantium corrupti pariatur dolorem animi.</p>
-            </slot>
-                <slot name="header4">
-                <h4><strong>999sek</strong></h4>
-            </slot>
-            <div id="button-div">
-                <img src="@/assets/icon-bag-white.svg">
-                <label id="order-label">Order now</label>
+        <div class="fade-layer">
+            <div class="content">
+                <div id="product-picture">
+                    <slot name="img-file"/>
+                </div>
+                <div id="body">
+                    <slot id="header" name="header"/>
+                    <slot name="short-desc"/>
+                    <slot name="long-desc" />
+                    <slot name="price"/>
+                    <div id="button-div">
+                        <img src="@/assets/icon-bag-white.svg">
+                        <label id="order-label">Order now</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -28,27 +22,38 @@
 
 <script>
 export default {
-
+    props: {
+        //show: Boolean
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-.product-view {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: auto auto;
-    align-content: center;
+#body {
+    color: red;
 }
-#button-div {
-    align-items: center;
-    align-self: center;
-    background-color: black;
-    width: 12rem;
-    height: 3rem;
-    border-radius: 50px;
-    label {
-        margin: 8px;
-        color: white;
-    }
-}
+// .fade-layer {
+//     position: fixed;
+//     top: 0; left: 0; bottom: 0; right: 0;
+//     background-color: rgba(0,0,0,0.25);
+//     transition: opacity 0.25s;
+//     pointer-events: none;
+//     opacity: 0;
+// }
+// .fade-layer.show {
+//     pointer-events: all;
+//     opacity: 1;
+// }
+// .content {
+//     padding: 2rem;
+//     transition: opacity 0.25s;
+//     opacity: 0;
+//     position: fixed;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+// }
+// .content.show {
+//     opacity: 1;
+// }
 </style>
