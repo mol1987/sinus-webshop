@@ -1,29 +1,39 @@
+// *** This is modal component. It is a child component to Products.vue. 
+
 <template>
-    <div class="product-vue">
-        <div id="product-picture">
-            <slot name="item-img">
-             <img src="@/assets/skateboard-greta.png">
-            </slot>
-        </div>
-        <div id="body">
-            <slot name="header3">
-                <h3>Greta Fury</h3>
-            </slot> 
-            <slot name="label">
-                <label>Unisex</label>
-            </slot>
-            <slot name="paragraph">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis sapiente deleniti excepturi mollitia, explicabo voluptate accusantium corrupti pariatur dolorem animi.</p>
-            </slot>
-                <slot name="header4">
-                <h4><strong>999sek</strong></h4>
-            </slot>
-            <div id="button-div">
-                <img src="@/assets/icon-bag-white.svg">
-                <label id="order-label">Order now</label>
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <!-- *** Close popup button *** -->
+                <button id="closeBtn" @click="$emit('close')">X</button>
+
+                <!-- *** Content accepts data and template from its parent Products.vue via slots *** -->
+                <div class="content">
+                    <div id="product-picture">
+                        <slot name="img-file"/>
+                    </div>
+                    <div id="body">
+                        <div id="header">
+                            <slot name="header"/>
+                        </div>
+                        <div id="short-desc">
+                            <slot name="short-desc"/>
+                        </div>
+                        <div id="long-desc">
+                            <slot name="long-desc" />
+                        </div>
+                        <div id="price">
+                            <slot name="price"/>
+                        </div>
+                        <div id="button-div">
+                            <img src="@/assets/icon-bag-white.svg">
+                            <label id="order-label">Order now</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -33,22 +43,76 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product-view {
+.content {
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: auto auto;
-    align-content: center;
+    grid-template-columns: 1fr 1fr;
+    #product-picture {
+        align-self: flex-end;
+        width: 100%;
+    }
+    #body {
+        padding: 25%;
+        align-self: center;
+        background-color: white;
+        #header {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        #short-desc {
+            margin-bottom: 10px;
+        }
+        #long-desc {
+            margin-bottom: 10px;
+        }
+        #price {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+    }
 }
 #button-div {
-    align-items: center;
-    align-self: center;
+    height: 60px;
+    width: 210px;
     background-color: black;
-    width: 12rem;
-    height: 3rem;
     border-radius: 50px;
-    label {
-        margin: 8px;
-        color: white;
+    color: white;
+    margin-left: 20%;
+    margin-top: 35px;
+    padding: 12px;
+    img {
+        margin-right: 8px;
     }
+}
+
+// *** Styling to make modal component as a popup 
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: table;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  #closeBtn {
+      height: 25px;
+      width: 25px;
+      background-color: red;
+      color: white;
+  }
+}
+.content {
+  width: auto;
+  max-width: 800px;
+  margin: 0px auto;
+  padding: 0px 30px;
+  background-color: rgba(247, 243, 243, 0.959);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
 }
 </style>
