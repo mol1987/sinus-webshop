@@ -6,10 +6,18 @@
                     <slot name="img-file"/>
                 </div>
                 <div id="body">
-                    <slot id="header" name="header"/>
-                    <slot name="short-desc"/>
-                    <slot name="long-desc" />
-                    <slot name="price"/>
+                    <div id="header">
+                        <slot name="header"/>
+                    </div>
+                    <div id="short-desc">
+                        <slot name="short-desc"/>
+                    </div>
+                    <div id="long-desc">
+                        <slot name="long-desc" />
+                    </div>
+                    <div id="price">
+                        <slot name="price"/>
+                    </div>
                     <div id="button-div">
                         <img src="@/assets/icon-bag-white.svg">
                         <label id="order-label">Order now</label>
@@ -29,8 +37,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#body {
-    color: red;
+.content {
+    display: flex;
+    flex-direction: row;
+    #product-picture {
+        align-self: flex-end;
+    }
+    #body {
+        padding: 10%;
+        align-self: center;
+        background-color: white;
+        #header {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        #short-desc {
+            margin-bottom: 10px;
+        }
+        #long-desc {
+            margin-bottom: 10px;
+        }
+        #price {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+    }
+}
+#button-div {
+    height: 60px;
+    width: 210px;
+    background-color: black;
+    border-radius: 50px;
+    color: white;
+    margin-left: 20%;
+    margin-top: 35px;
+    padding: 12px;
+    img {
+        margin-right: 8px;
+    }
 }
 // .fade-layer {
 //     position: fixed;
