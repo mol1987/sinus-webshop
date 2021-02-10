@@ -1,8 +1,7 @@
 <template>
     <transition name="modal">
         <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+            <div class="modal-wrapper">
                 <div class="content">
                     <div id="product-picture">
                         <slot name="img-file"/>
@@ -27,25 +26,23 @@
                     </div>
                 </div>
             </div>
-          </div>
         </div>
     </transition>
 </template>
 
 <script>
 export default {
-    props: {
-        //show: Boolean
-    }
+
 }
 </script>
 
 <style lang="scss" scoped>
 .content {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     #product-picture {
         align-self: flex-end;
+        width: 100%;
     }
     #body {
         padding: 25%;
@@ -91,7 +88,6 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: table;
-//   transition: opacity 0.3s ease;
 }
 .modal-wrapper {
   display: table-cell;
@@ -99,7 +95,7 @@ export default {
 }
 .content {
   width: auto;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0px auto;
   padding: 0px 30px;
   background-color: rgba(247, 243, 243, 0.959);

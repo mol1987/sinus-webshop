@@ -66,9 +66,6 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    // display: grid;
-    // grid-gap: 1rem;
-    // grid-template-columns: auto auto auto;
 
     #product-card {
       width: 180px;
@@ -76,10 +73,7 @@ export default {
       margin-bottom: 10px;
     }
 }
-
-// @media only screen and (min-width: 200px) {
-//   .products {
-//     width: 50%;
-//   }
-// }
+img {
+  width: 100%;
+}
 </style>
