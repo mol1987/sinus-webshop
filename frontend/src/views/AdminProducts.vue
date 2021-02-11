@@ -10,38 +10,76 @@
                 <div class="selected-box">
                     <div class="left-input">
                         <p>Product Photo</p>
-                        <input type="image">
+                        <input type="image"  v-model="currentImage">
                    </div>
                     
                    <div class="middle-input">
                        <label>Product name</label>
-                       <input type="text">
+                       <input type="text" v-model="currentProduct.title">
                        <label>Product short desc</label>
-                       <input type="text">
+                       <input type="text" v-model="currentProduct.shortDesc">
                        <label>Product Price</label>
-                       <input type="text">
+                       <input type="text" v-model="currentProduct.price">
                        <label>Product Serial</label>
-                       <input type="text">
+                       <input type="text" v-model="currentProduct.serial">
 
                    </div>
                    <div class="right-input">
                         <p>Product Description</p>
-                        <textarea></textarea>
+                        <textarea v-model="currentProduct.longDesc"></textarea>
                    </div>
-                   
                 </div>
+            <div class="products">
+                <!-- *** For each object in products display product-card component *** -->
+                <div class="product-container" v-for="product in products" :key="product.id">
+                    <product-card v-on:clicked-card="currentProduct = product" id="product-card"/>
+                </div>
+            </div>
+           
         </div>
     </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav'
+import ProductCard from '../components/ProductCard.vue'
+import Products from '/database/productsSeed.json'
 
 export default {
     name: "AdminProducts",
     components: {
-        Nav
+        Nav,
+        ProductCard,
+    },
+    computed: {
+        currentImage() {
+            return this.getImage(this.currentProduct.imgFile)
+        }
+    },
+    data() {
+    return {
+      products: Products,
+      currentProduct:  {
+        "title" : "",
+        "price" : null,
+        "shortDesc" : "",
+        "category": "",
+        "longDesc" : "",
+        "imgFile" : "hoodie-ocean.png",
+        "serial" : ""
+    },
     }
+  },
+  methods: {
+    // Just get an image from the assets. Should be reassigned by the fetch or axios later on.
+    getImage(path) {          
+      return require(`../assets/${path}`)
+    },
+    // Closing the modal component. May fix it without close button later.
+    closePopup() {
+      this.currentProduct = null
+    },
+  },
 }
 </script>
 
@@ -75,7 +113,8 @@ textarea {
         text-align: left;
         >input {
             width: 100%;
-            height: 90%;
+            height: 95%;
+            border-width: 0px;
         }
     }
     .middle-input {
@@ -125,6 +164,13 @@ textarea {
     >h2{
         text-align: left;
     }
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 }
 
 </style>
