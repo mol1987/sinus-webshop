@@ -1,5 +1,6 @@
 <template>
     <div class="cart">
+        <div id="arrow"></div>
         <div id="product-list">
             <div id="product-item" v-for="item in addedItems" :key="item.id">
                 <div id="imgFile">
@@ -74,10 +75,18 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: white;
-    width: 150px;
+    width: 170px;
     height: 250px;
     box-shadow: 7px 2px 8px rgba(0, 0, 0, 0.33);
 
+    #arrow {
+        height: 1rem;
+        width: 22px;
+        background-color: white;
+        transform: rotate(45deg);
+        position: relative;
+        bottom: 1;
+        }
     #btn {
         background-color: black;
         color: white;
