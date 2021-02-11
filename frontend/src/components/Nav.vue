@@ -7,7 +7,8 @@
                 <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register</router-link>
                 <img id="login" src="@/assets/icons8-customer-64.png">
                 <div class="cart-section">
-                    <img id="cart" src="@/assets/icon-bag-white.svg">
+                    <img id="cart" src="@/assets/icon-bag-white.svg" @click="openCart">
+                    <cart id="cart-modal" v-if="show"/>
                     <div class="circle-number"><p>{{cartItemAmount}}</p></div>
                 </div>
             </div>
@@ -16,15 +17,20 @@
                 <router-link to="/Admin" v-bind:class="{activated: flagActivated('/admin')}">Orders</router-link>
                 <a href="#">My Account</a>
             </div>
+            
         </div>
     </div>
 </template>
 
 <script>
+import Cart from './Cart.vue'
+
 export default {
+  components: { Cart },
     name: "Nav",
     props: ["navBarState"],
     data() { return {
+        show: false,
     }},
     computed: {
         cartItemAmount() {
@@ -44,6 +50,9 @@ export default {
         flagActivated(routeName) {
             if (routeName == this.$router.currentRoute.path) return true
             return false
+        }, 
+        openCart() {
+            this.show = !this.show
         }
     }
 }
@@ -53,7 +62,10 @@ export default {
 .activated {
     font-weight: 700;
 }
-
+#cart-modal {
+    margin-top: 45px;
+    margin-right: 35px;
+}
 
 .Nav {
     width: 100%;
