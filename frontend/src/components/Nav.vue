@@ -2,13 +2,15 @@
     <div class="Nav">
         <div class="nav-bar">
             <img src="~@/assets/sinus-logo.svg">
+
             <div class="right-side" v-if="NavBarStateUser">
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
                 <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register</router-link>
-                <img id="login" src="@/assets/icons8-customer-64.png">
+                <img id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
+                <login id="login-modal" v-if="showLogin"/>
                 <div class="cart-section">
                     <img id="cart" src="@/assets/icon-bag-white.svg" @click="openCart">
-                    <cart id="cart-modal" v-if="show"/>
+                    <cart id="cart-modal" v-if="showCart"/>
                     <div class="circle-number"><p>{{cartItemAmount}}</p></div>
                 </div>
             </div>
@@ -24,13 +26,15 @@
 
 <script>
 import Cart from './Cart.vue'
+import Login from './Login.vue'
 
 export default {
-  components: { Cart },
+  components: { Cart, Login },
     name: "Nav",
     props: ["navBarState"],
     data() { return {
-        show: false,
+        showCart: false,
+        showLogin: false,
     }},
     computed: {
         cartItemAmount() {
@@ -52,7 +56,16 @@ export default {
             return false
         }, 
         openCart() {
-            this.show = !this.show
+            if (this.showLogin) {
+                this.showLogin = false
+            }
+            this.showCart = !this.showCart
+        },
+        openLogin() {
+            if (this.showCart) {
+                this.showCart = false
+            }
+            this.showLogin = !this.showLogin
         }
     }
 }
@@ -65,6 +78,7 @@ export default {
 #cart-modal {
     margin-top: 45px;
     margin-right: 35px;
+    z-index: 10;
 }
 
 .Nav {
@@ -77,6 +91,12 @@ export default {
         justify-items: center;
         align-items: center;
         width: 15rem;
+    }
+    #login-modal {
+        position: absolute;
+        top: 50px;
+        right: 25px;        
+        z-index: 10;
     }
 
 .nav-bar {

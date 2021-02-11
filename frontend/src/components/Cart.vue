@@ -1,3 +1,5 @@
+// *** This is modal component. Popups when user opens cart via navbar
+
 <template>
     <div class="cart">
         <div id="arrow"></div>
