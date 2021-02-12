@@ -1,3 +1,5 @@
+// *** Login popup component. 
+
 <template>
   <div class="login">
     <div id="arrow"></div>
@@ -6,7 +8,7 @@
         <input v-model="password" type="password" placeholder="password"/>
       </form>
       <div id="btnDiv">
-        <router-link to="/" tag="button">Register</router-link>
+        <router-link to="/Register" tag="button">Register</router-link>
         <button>Login</button>
       </div>
   </div>

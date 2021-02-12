@@ -1,33 +1,45 @@
 <template>
   <div class="register">
     <div class="register-sub">
-    <Nav />
+      <Nav />
     <div class="skate-img"></div>
-    <div class="under">
-      <div class="text">
-        <h3>Cowabunga</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore fuga quasi nam, expedita architecto dolor est magni sequi doloribus dignissimos autem laboriosam corrupti, corporis voluptatem possimus ea quos fugiat quidem.</p><br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore fuga quasi nam, expedita architecto dolor est magni sequi doloribus dignissimos autem laboriosam corrupti, corporis voluptatem possimus ea quos fugiat quidem.</p>
-      </div>
+    <div class="register-fields">
       <form>
         <h3>Register</h3>
-        <label for="fname">Name:</label><br>
+        <label for="fname">Full name:</label><br>
         <input type="text" id="fname" name="fname"><br>
         <label for="lname">Email:</label><br>
-        <input type="text" id="lname" name="lname">
+        <input type="text" id="lname" name="lname"><br>
         <label for="lname">Password:</label><br>
-        <input type="text" id="lname" name="lname">
+        <input type="password" id="password" name="password"><hr>
+        <div id="adress-fields">
+            <label for="adress">Adress: </label>
+            <div id="adress-info">
+                <input type="text" name="street" placeholder="street">
+                <input type="number" name="zip" placeholder="zip">
+                <input type="text" name="city" placeholder="city">
+            </div>
+        </div>
+        <hr>
+        <h4>Payment information</h4>
+        <div id="payment-info">
+            <input type="text" name="cardOwner" id="owner" placeholder="name on card">
+            <input type="number" name="cardNumber" id="card-number" placeholder="card number">
+            <input type="number" name="validUntil" id="valid-until" placeholder="expire date">
+            <input type="number" name="cvv" id="cvv" placeholder="cvv">
+        </div>
+        <div id="btn-div">
+            <button>Register</button>
+            <button>Cancel</button>
+        </div>
       </form>
     </div>
     </div>
-    <!-- <Product-view/> -->
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
-// @ is an alias to /src
-
 
 export default {
   name: 'Register',
@@ -46,6 +58,34 @@ export default {
 .register-sub {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  .register-fields {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 80px;
+      #adress-fields {
+          display: flex;
+          margin-top: 5px;
+      }
+      h4 {
+          margin-top: 5px;
+      }
+      #payment-info {
+          margin-top: 5px;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-gap: 5px;
+      }
+      button {
+          margin-top: 15px;
+          margin-right: 15px;
+          background-color: black;
+          color: white;
+          height: 25px;
+          width: 75px;
+          border-radius: 50px;
+      }
+  }
 }
 .skate-img {
   width: 100%;
@@ -54,8 +94,4 @@ export default {
   background-size: 100%;
   background-repeat: no-repeat;
 }
-.under {
-  display: flex;
-}
-
 </style>

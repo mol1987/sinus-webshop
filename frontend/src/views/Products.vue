@@ -10,8 +10,8 @@
                 <product-card v-on:clicked-card="currentProduct = product" id="product-card"/>
             </div>
 
-            <!-- *** This is product-view template which uses in the slots of ProductView modal component *** -->
-            <product-view v-if="currentProduct" v-on:close="closePopup">
+            <!-- *** This is product-view template which uses with the slots of ProductView modal component *** -->
+            <product-view id="product-view" v-if="currentProduct" v-on:close="closePopup">
                   <template v-slot:img-file>
                     <img :src="getImage(currentProduct.imgFile)">
                   </template>

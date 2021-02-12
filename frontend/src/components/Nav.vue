@@ -1,11 +1,13 @@
 <template>
     <div class="Nav">
         <div class="nav-bar">
-            <img src="~@/assets/sinus-logo.svg">
+            <router-link id="logo" to="/">
+                <img src="@/assets/sinus-logo.svg">
+            </router-link>
 
             <div class="right-side" v-if="NavBarStateUser">
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
-                <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register</router-link>
+                <!-- <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register me</router-link> -->
                 <img id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
                 <login id="login-modal" v-if="showLogin"/>
                 <div class="cart-section">
@@ -77,7 +79,7 @@ export default {
 }
 #cart-modal {
     margin-top: 45px;
-    margin-right: 35px;
+    margin-right: 55px;
     z-index: 10;
 }
 
@@ -94,8 +96,8 @@ export default {
     }
     #login-modal {
         position: absolute;
-        top: 50px;
-        right: 25px;        
+        top: 55px;
+        right: 60px;        
         z-index: 10;
     }
 
@@ -103,11 +105,9 @@ export default {
     display: flex;
     justify-content: space-between;
     height: 50px;
-    >img {
+    #logo {
     height: 100%;
-    width: 100px;
-
-    
+    width: 100px; 
 }
 }
 a {

@@ -27,7 +27,7 @@
                         </div>
                         <div id="button-div">
                             <img src="@/assets/icon-bag-white.svg">
-                            <label id="order-label">Order now</label>
+                            <label id="order-label">Add to cart</label>
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,12 @@ export default {
     padding: 12px;
     img {
         margin-right: 8px;
+        width: 10%;
+    }
+    #order-label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 10px;
     }
 }
 
