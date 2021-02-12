@@ -32,11 +32,14 @@ export default {
   width: 100%;
 }
 .skate-img {
-  width: 100%;
-  height: 500px;
-  background-image: url("~@/assets/skate-hero-1.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background: url('../assets/skate-hero-1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 2rem rgba(0,0,0,.2);
 }
 .under {
   display: flex;
