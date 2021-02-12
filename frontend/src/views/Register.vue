@@ -1,8 +1,8 @@
 <template>
   <div class="register">
-    <div class="register-sub">
       <Nav />
     <div class="skate-img"></div>
+    
     <div class="register-fields">
       <form>
         <h3>Register</h3>
@@ -34,7 +34,6 @@
         </div>
       </form>
     </div>
-    </div>
   </div>
 </template>
 
@@ -52,13 +51,10 @@ export default {
 <style lang="scss" scoped>
 .register {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-}
-.register-sub {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+
   .register-fields {
       display: flex;
       justify-content: center;

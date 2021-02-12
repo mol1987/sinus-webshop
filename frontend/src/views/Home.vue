@@ -1,24 +1,14 @@
 <template>
   <div class="home">
-    <div class="home-sub">
       <Nav />
     <div class="skate-img"></div>
+    
     <div class="under">
       <div class="text">
         <h3>Cowabunga</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore fuga quasi nam, expedita architecto dolor est magni sequi doloribus dignissimos autem laboriosam corrupti, corporis voluptatem possimus ea quos fugiat quidem.</p><br>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore fuga quasi nam, expedita architecto dolor est magni sequi doloribus dignissimos autem laboriosam corrupti, corporis voluptatem possimus ea quos fugiat quidem.</p>
       </div>
-      <!-- <form>
-        <h3>Register</h3>
-        <label for="fname">Name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">Email:</label><br>
-        <input type="text" id="lname" name="lname">
-        <label for="lname">Password:</label><br>
-        <input type="text" id="lname" name="lname">
-      </form> -->
-    </div>
     </div>
   </div>
 </template>
@@ -37,12 +27,9 @@ export default {
 <style lang="scss" scoped>
 .home {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-}
-.home-sub {
-  display: flex;
-  flex-direction: column;
 }
 .skate-img {
   width: 100%;
