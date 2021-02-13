@@ -1,8 +1,12 @@
-
-
 <template>
   <div class="test-products">
     <p>test-product</p>
+    <label>email</label>
+    <input v-model="email">
+    <label>password</label>
+    <input v-model="password">
+    <button type="submit" v-on:click="OnSubmitLogin">submit</button>
+
     <form @keyup.enter.native="OnSubmitGetProduct" @submit.prevent="OnSubmitGetProduct">
       <input v-model="getProduct">
     </form>
@@ -40,13 +44,34 @@ export default {
       this.$store.dispatch("GetProduct", this.getProduct)
     },
     OnSubmitUpdateProduct() {
-      this.$router.go(0)  
-      this.$store.dispatch("GetProduct", {_id: this.updateProductId, title: this.updateProductTitle})
+      //this.$router.go(0)  
+      this.$store.dispatch("UpdateProduct", {_id: this.updateProductId, title: this.updateProductTitle})
+    },
+    OnSubmitLogin() {
+      this.$store.dispatch("AuthenticateUser", {email: this.email, password: this.password})
     }
   },
   created() {
     this.$store.dispatch("GetAllProducts")
-  }
+    //.dispatch("AuthenticateUser", {name: 'Johan Kivi', })
+
+    // this.$store.dispatch("RegisterUser", {
+    //   _id: null, // generated server side
+    //   email: 'elchin.mussolini@zocom.se',
+    //   password: 'password',
+    //   repeatPassword: 'password',
+    //   name: 'Elchin Mussolini',
+    //   role: 'customer', // or customer
+
+    //   adress: {
+    //       street: 'Tokitokvägen 3',
+    //       zip: '123 45',
+    //       city: 'Tokberga'
+    //   },
+    //   orderHistory: []
+    //   })
+  },
+  
   
 }
 </script>

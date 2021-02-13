@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     productList: {},
-    product: {}
+    product: {},
+    loggedInUser: {},
+    userToken: null
   },
   mutations: {
     GetAllProducts(state, data) {
@@ -15,6 +17,10 @@ export default new Vuex.Store({
     },
     GetProduct(state, data) {
       state.product = data
+    },
+    AuthenticateUser(state, data) {
+        state.userToken = data.token
+        state.loggedInUser = data.user
     }
   },
   getters: {
@@ -30,6 +36,15 @@ export default new Vuex.Store({
     },
     async UpdateProduct(context, payload) {
       await API.UpdateProduct(payload._id, payload)
+    },
+    async AuthenticateUser(context, payload) {
+      const result = await API.AuthenticateUser(payload)
+      context.commit('AuthenticateUser', result)
+    },
+    async RegisterUser(context, payload) {
+      console.log(payload)
+      const result = await API.RegisterUser(payload)
+      console.log(result)
     }
   },
   modules: {

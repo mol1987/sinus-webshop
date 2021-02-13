@@ -28,14 +28,27 @@ export async function DeleteProduct(id) {
 }
 
 export async function RegisterUser(data) { 
-    await fetch('http://localhost:5000/api/register/', 
-    {method: 'POST', body: JSON.stringify(data)} )
+    const req = await fetch('http://localhost:5000/api/register/', 
+    {method: 'POST',
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+     body: JSON.stringify(data)} )
+    const dataReq = await req.json()
+    return dataReq  
 }
 
 export async function AuthenticateUser(data) { 
-    const req = await fetch('http://localhost:5000/api/register/', 
-    {method: 'POST', body: JSON.stringify(data)} )
+    const req = await fetch('http://localhost:5000/api/auth/', 
+    {method: 'POST',
+    headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    body: JSON.stringify(data)} )
     const dataReq = await req.json()
+    console.log(dataReq)
     return dataReq    
 }
 
