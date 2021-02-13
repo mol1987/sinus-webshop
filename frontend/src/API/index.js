@@ -12,9 +12,15 @@ export async function GetProduct(id) {
     return data
 }
 
-export async function UpdateProduct(id, data) { 
-    await fetch('http://localhost:5000/api/products/' + id, 
-   {method: 'PATCH', body: JSON.stringify(data)} )
+export async function UpdateProduct(data, token) { 
+    await fetch('http://localhost:5000/api/products/' + data._id, 
+   {method: 'PATCH',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+    },
+   body: JSON.stringify(data)})
 }
 
 export async function CreateNewProduct(data) { 
@@ -22,9 +28,15 @@ export async function CreateNewProduct(data) {
     {method: 'POST', body: JSON.stringify(data)} )
 }
 
-export async function DeleteProduct(id) { 
+export async function DeleteProduct(id, token) { 
     await fetch('http://localhost:5000/api/products/' + id, 
-    {method: 'DELETE' })
+    {method: 'DELETE',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+        }
+     })
 }
 
 export async function RegisterUser(data) { 
@@ -52,14 +64,26 @@ export async function AuthenticateUser(data) {
     return dataReq    
 }
 
-export async function GetAllOrders() { 
+export async function GetAllOrders(token) { 
     const req = await fetch('http://localhost:5000/api/orders/',
-    {method: 'GET'} )
+    {method: 'GET',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+        }
+    } )
     const data = await req.json()
     return data
 }
 
-export async function CreateOrder(data) { 
+export async function CreateOrder(data, token) { 
     await fetch('http://localhost:5000/api/orders/', 
-    {method: 'POST', body: JSON.stringify(data)} )
+    {method: 'POST',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+    },
+     body: JSON.stringify(data)} )
 }

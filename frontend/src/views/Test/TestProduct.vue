@@ -10,6 +10,7 @@
     <form @keyup.enter.native="OnSubmitGetProduct" @submit.prevent="OnSubmitGetProduct">
       <input v-model="getProduct">
     </form>
+    <button type="submit" v-on:click="OnSubmitCreateOrder">Order</button>
     <p>{{oneProduct}}</p>
     <label>Id</label>
     <input v-model="updateProductId">
@@ -17,6 +18,8 @@
     <input v-model="updateProductTitle">
     <button type="submit" v-on:click="OnSubmitUpdateProduct">submit</button>
     <p>{{products}}</p>
+    <hr>
+    <p>{{orders}}</p>
   </div>
 </template>
 
@@ -37,6 +40,9 @@ export default {
     },
     oneProduct() {
       return this.$store.state.product
+    },
+    orders() {
+      return this.$store.state.orderList
     }
   },
   methods: {
@@ -44,15 +50,25 @@ export default {
       this.$store.dispatch("GetProduct", this.getProduct)
     },
     OnSubmitUpdateProduct() {
-      //this.$router.go(0)  
+      this.$router.go(0)  
       this.$store.dispatch("UpdateProduct", {_id: this.updateProductId, title: this.updateProductTitle})
     },
     OnSubmitLogin() {
       this.$store.dispatch("AuthenticateUser", {email: this.email, password: this.password})
+      this.$store.dispatch("GetAllOrders")
+    },
+    OnSubmitCreateOrder() {
+      this.$store.dispatch("CreateOrder", {
+        timeStamp: Date.now(), 
+        status: 'inProcess',
+        items: [ this.getProduct ], // Array of product IDs
+        orderValue: 999
+      })
     }
   },
   created() {
     this.$store.dispatch("GetAllProducts")
+    this.$store.dispatch("GetAllOrders")
     //.dispatch("AuthenticateUser", {name: 'Johan Kivi', })
 
     // this.$store.dispatch("RegisterUser", {
