@@ -61,7 +61,6 @@
                         </div>
                         <input type="submit" value="Submit">
                     </form>
-
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
 import Nav from '@/components/Nav'
 
 export default {
-    name: "MakeOrder",
+    name: " ",
     components: {
         Nav
     },

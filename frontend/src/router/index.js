@@ -9,6 +9,7 @@ import OrderDone from '../views/OrderDone.vue'
 import Products from '../views/Products.vue'
 import Profile from '../views/Profile.vue'
 import Register from '../views/Register.vue'
+import TestProduct from '../views/Test/TestProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,11 @@ const routes = [
     path: '/Profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/TestProduct',
+    name: 'TestProduct',
+    component: TestProduct
   }
 ]
 
