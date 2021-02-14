@@ -23,9 +23,16 @@ export async function UpdateProduct(data, token) {
    body: JSON.stringify(data)})
 }
 
-export async function CreateNewProduct(data) { 
-    await fetch('http://localhost:5000/api/products/', 
-    {method: 'POST', body: JSON.stringify(data)} )
+export async function CreateNewProduct(data, token) { 
+    const req = await fetch('http://localhost:5000/api/products/', 
+    {method: 'POST',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token},
+     body: JSON.stringify(data)} )
+     const dataReq = await req.json()
+     return dataReq
 }
 
 export async function DeleteProduct(id, token) { 

@@ -41,6 +41,10 @@ export default new Vuex.Store({
     async UpdateProduct(context, payload) {
       await API.UpdateProduct(payload, this.state.userToken)
     },
+    async CreateNewProduct(context, payload) {
+      const result = await API.CreateNewProduct(payload, this.state.userToken)
+      console.log(result)
+    },
     async DeleteProduct(context, payload) {
       await API.DeleteProduct(payload, this.state.userToken)
     },

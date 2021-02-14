@@ -20,9 +20,31 @@
     <p>{{products}}</p>
     <hr>
     <p>{{orders}}</p>
+    <hr>
+
+    <div class="selected-box">
+      <div class="left-input">
+            <p>Product Photo</p>
+            <input type="image"  v-model="currentImage">
+      </div>
+        
+      <div class="middle-input">
+          <label>Product name</label>
+          <input type="text" v-model="currentProduct.title">
+          <label>Product short desc</label>
+          <input type="text" v-model="currentProduct.shortDesc">
+          <label>Product Price</label>
+          <input type="text" v-model="currentProduct.price">
+
+      </div>
+      <div class="right-input">
+            <p>Product Description</p>
+            <textarea v-model="currentProduct.longDesc"></textarea>
+      </div>
+      <button type="submit" v-on:click="OnSubmitCreateProduct">submit</button>
+    </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -31,7 +53,15 @@ export default {
     return {
       getProduct: null,
       updateProductId: null,
-      updateProductTitle: null
+      updateProductTitle: null,
+      currentProduct:  {
+        _id: '39y7gbbZk1u4ABnv', // generated serverside
+        title: 'Gretas Fury',
+        price: 999,
+        shortDesc: 'Unisex',
+        longDesc: 'Skate ipsum dolor sit amet...',
+        imgFile: 'skateboard-greta.png' // Asset logic on clientside
+      } 
     }
   },
   computed: {
@@ -41,17 +71,27 @@ export default {
     oneProduct() {
       return this.$store.state.product
     },
+    
     orders() {
       return this.$store.state.orderList
+    },
+    currentImage() {
+      return this.getImage(this.currentProduct.imgFile)
     }
   },
   methods: {
+    getImage(path) {          
+      return require(`../../assets/${path}`)
+    },
     OnSubmitGetProduct() {
       this.$store.dispatch("GetProduct", this.getProduct)
     },
     OnSubmitUpdateProduct() {
       this.$router.go(0)  
       this.$store.dispatch("UpdateProduct", {_id: this.updateProductId, title: this.updateProductTitle})
+    },
+    OnSubmitCreateProduct() {
+      this.$store.dispatch("CreateNewProduct", this.currentProduct)
     },
     OnSubmitLogin() {
       this.$store.dispatch("AuthenticateUser", {email: this.email, password: this.password})
