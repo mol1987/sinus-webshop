@@ -4,12 +4,12 @@
   <div class="login">
     <div id="arrow"></div>
       <form>
-        <input v-model="username" type="text" placeholder="username"/>
+        <input v-model="email" type="text" placeholder="email"/>
         <input v-model="password" type="password" placeholder="password"/>
       </form>
       <div id="btnDiv">
         <router-link to="/Register" tag="button">Register</router-link>
-        <button>Login</button>
+        <button @click="login">Login</button>
       </div>
   </div>
 </template>
@@ -19,8 +19,14 @@ export default {
     name: "Login",
     data() {
       return {
-        username: '',
+        email: '',
         password: ''
+      }
+    },
+    methods: {
+      login() {
+        
+        this.$store.dispatch('AuthenticateUser', {email: this.email, password: this.password} )
       }
     },
 }

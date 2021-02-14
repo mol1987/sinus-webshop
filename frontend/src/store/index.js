@@ -28,6 +28,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    inloggedUser: state => {
+      return state.loggedInUser
+    }
   },
   actions: {
     async GetAllProducts(context) {
@@ -51,6 +54,7 @@ export default new Vuex.Store({
     async AuthenticateUser(context, payload) {
       const result = await API.AuthenticateUser(payload)
       context.commit('AuthenticateUser', result)
+      console.log('Molle wants result',result)
     },
     async RegisterUser(context, payload) {
       console.log(payload)

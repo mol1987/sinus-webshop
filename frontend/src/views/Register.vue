@@ -2,37 +2,31 @@
   <div class="register">
       <Nav />
     <div class="skate-img"></div>
-    
     <div class="register-fields">
       <form>
         <h3>Register</h3>
         <label for="fname">Full name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
+        <input type="text" id="fname" name="fname" v-model="userData.name"><br>
         <label for="lname">Email:</label><br>
-        <input type="text" id="lname" name="lname"><br>
+        <input type="text" id="email" name="email"  v-model="userData.email"><br>
         <label for="lname">Password:</label><br>
-        <input type="password" id="password" name="password"><hr>
+        <input type="password" id="password" name="password"  v-model="userData.password"><br>
+        <label for="lname">Confirm password:</label><br>
+        <input type="password" id="confirmPass" name="confirmPass"  v-model="userData.repeatPassword"><hr>
         <div id="adress-fields">
             <label for="adress">Adress: </label>
             <div id="adress-info">
-                <input type="text" name="street" placeholder="street">
-                <input type="number" name="zip" placeholder="zip">
-                <input type="text" name="city" placeholder="city">
+                <input type="text" name="street" placeholder="street"  v-model="userData.adress.street">
+                <input type="number" name="zip" placeholder="zip"  v-model="userData.adress.zip">
+                <input type="text" name="city" placeholder="city"  v-model="userData.adress.city">
             </div>
         </div>
         <hr>
-        <h4>Payment information</h4>
-        <div id="payment-info">
-            <input type="text" name="cardOwner" id="owner" placeholder="name on card">
-            <input type="number" name="cardNumber" id="card-number" placeholder="card number">
-            <input type="number" name="validUntil" id="valid-until" placeholder="expire date">
-            <input type="number" name="cvv" id="cvv" placeholder="cvv">
-        </div>
-        <div id="btn-div">
-            <button>Register</button>
-            <button>Cancel</button>
-        </div>
       </form>
+      <div id="btn-div">
+          <button @click="registerUser">Register</button>
+          <button @click="cancel">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +38,46 @@ export default {
   name: 'Register',
   components: {
     Nav
-  }
+  },
+  data() {
+    return {
+      userData: {
+        email: '',
+        password: '',
+        repeatPassword: '',
+        name: '',
+        role: 'customer',
+        adress: {
+            street: '',
+            zip: '',
+            city: ''
+          },
+        }, 
+        // *** This data is just to reset input fields when cancel button is clicked.
+        initialState: {
+          email: '',
+        password: '',
+        repeatPassword: '',
+        name: '',
+        role: 'customer',
+        adress: {
+            street: '',
+            zip: '',
+            city: ''
+          },
+        }
+      }
+    },
+  methods: {
+    registerUser() {
+      console.log(this.userData)
+      this.$store.dispatch('RegisterUser', this.userData)
+      alert('You have been registered! Thank you!')
+    },
+    cancel() {
+      this.userData = this.initialState
+    }
+  },
 }
 </script>
 
@@ -57,20 +90,23 @@ export default {
 
   .register-fields {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       margin-bottom: 80px;
       #adress-fields {
           display: flex;
           margin-top: 5px;
+          label {
+            margin-left: 50px;
+          }
+          #adress-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 50px;
+          }
       }
       h4 {
           margin-top: 5px;
-      }
-      #payment-info {
-          margin-top: 5px;
-          display: grid;
-          grid-template-columns: auto auto;
-          grid-gap: 5px;
       }
       button {
           margin-top: 15px;
