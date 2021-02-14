@@ -28,6 +28,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    inloggedUser: state => {
+      return state.loggedInUser
+    }
   },
   actions: {
     async GetAllProducts(context) {
