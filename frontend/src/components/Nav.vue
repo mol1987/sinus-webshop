@@ -8,7 +8,7 @@
             <div class="right-side" v-if="NavBarStateUser">
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
                 <!-- <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register me</router-link> -->
-                <img v-if="isEmpty()" id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
+                <img v-if="true" id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
                 <p>{{this.inloggedUser.name}}</p>
                 <login id="login-modal" v-if="showLogin"/>
                 <div class="cart-section">
@@ -75,9 +75,9 @@ export default {
             this.showLogin = !this.showLogin
         },
         isEmpty() {
-            console.log(this.$store.getters.inloggedUser.length)
-            if (this.$store.getters.inloggedUser.length != undefined) return false
-            return true;
+            // console.log(this.$store.getters.inloggedUser.length)
+            // if (this.$store.getters.inloggedUser.length != undefined) return false
+            // return true;
         }
     }
 }
