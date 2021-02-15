@@ -28,6 +28,11 @@ export default new Vuex.Store({
     },
     AddOrder(state, data) {
       state.orderList.push(data)
+    },
+    LogoutUser(state) {
+      state.orderList = {}
+      state.loggedInUser = null
+      state.userToken = null
     }
   },
   getters: {
@@ -76,7 +81,7 @@ export default new Vuex.Store({
     },
     async CreateOrder(context, payload) {
       await API.CreateOrder(payload, this.state.userToken)
-    }
+    },
   },
   modules: {
   }

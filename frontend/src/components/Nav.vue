@@ -9,7 +9,8 @@
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
                 <!-- <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register me</router-link> -->
                 <img v-if="!inloggedUser" id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
-                <p v-if="inloggedUser">{{this.inloggedUser.name}}</p>
+                <p v-if="inloggedUser" @click="showProfilePopup">{{this.inloggedUser.name}}</p>
+                <profile-popup id="profilePopup-modal" v-if="inlogged"/>
                 <login id="login-modal" v-if="showLogin && !inloggedUser"/>
                 <div class="cart-section">
                     <img id="cart" src="@/assets/icon-bag-white.svg" @click="openCart">
@@ -30,14 +31,20 @@
 <script>
 import Cart from './Cart.vue'
 import Login from './Login.vue'
+import ProfilePopup from './ProfilePopup.vue'
 
 export default {
-  components: { Cart, Login },
+  components: { 
+      Cart, 
+      Login, 
+      ProfilePopup 
+    },
     name: "Nav",
     props: ["navBarState"],
     data() { return {
         showCart: false,
         showLogin: false,
+        inlogged: false,
     }},
     computed: {
         cartItemAmount() {
@@ -65,14 +72,26 @@ export default {
             if (this.showLogin) {
                 this.showLogin = false
             }
+            if (this.inlogged) {
+                this.inlogged = false
+            }
             this.showCart = !this.showCart
         },
         openLogin() {
             if (this.showCart) {
                 this.showCart = false
             }
+            if (this.inlogged) {
+                this.inlogged = false
+            }
             this.showLogin = !this.showLogin
         },
+        showProfilePopup() {
+            if (this.showCart) {
+                this.showCart = false
+            }
+            this.inlogged = !this.inlogged
+        }
     }
 }
 </script>
@@ -102,6 +121,12 @@ export default {
         position: absolute;
         top: 55px;
         right: 60px;        
+        z-index: 10;
+    }
+    #profilePopup-modal {
+        position: absolute;
+        top: 55px;
+        right: 70px;        
         z-index: 10;
     }
 
