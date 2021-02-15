@@ -73,6 +73,14 @@ export default {
             }
             this.showLogin = !this.showLogin
         },
+<<<<<<< HEAD
+=======
+        isEmpty() {
+            // console.log(this.$store.getters.inloggedUser.length)
+            // if (this.$store.getters.inloggedUser.length != undefined) return false
+            // return true;
+        }
+>>>>>>> productfunctions--molle
     }
 }
 </script>

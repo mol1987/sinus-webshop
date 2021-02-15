@@ -42,24 +42,27 @@
 </template>
 
 <script>
-import Products from '/database/productsSeed.json'
 
 export default {
     name: "Cart", 
     data() {
         return {
             // *** Edit addedItems to pupulate list by clicking on items from Products.vue
-            addedItems: Products,
             total: 0,
         }
     },
     computed: {
         // *** Method to calculate total price from the addedItems list
         calculateTotal() {
-            this.addedItems.forEach(e => {
-                this.total += e.price
-            });
+            if (this.addedItems != null) {
+                this.addedItems.forEach(e => {
+                    this.total += e.price
+                });
+            }
             return this.total
+        },
+        addedItems() {
+            return this.$store.getters.GetOrders
         }
     }
 }

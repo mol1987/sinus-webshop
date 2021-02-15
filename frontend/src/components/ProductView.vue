@@ -25,7 +25,7 @@
                         <div id="price">
                             <slot name="price"/>
                         </div>
-                        <div id="button-div">
+                        <div id="button-div" @click="$emit('add-to-cart')">
                             <img src="@/assets/icon-bag-white.svg">
                             <label id="order-label">Add to cart</label>
                         </div>
@@ -38,7 +38,8 @@
 
 <script>
 export default {
-
+    methods: {
+    }
 }
 </script>
 

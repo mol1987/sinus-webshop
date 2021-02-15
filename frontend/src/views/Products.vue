@@ -11,7 +11,7 @@
             </div>
 
             <!-- *** This is product-view template which uses with the slots of ProductView modal component *** -->
-            <product-view id="product-view" v-if="currentProduct" v-on:close="closePopup">
+            <product-view id="product-view" v-if="currentProduct" v-on:close="closePopup" v-on:add-to-cart="AddToCart">
                   <template v-slot:img-file>
                     <img :src="getImage(currentProduct.imgFile)">
                   </template>
@@ -60,6 +60,9 @@ export default {
     closePopup() {
       this.currentProduct = null
     },
+    AddToCart() {
+      this.$store.commit('AddOrder', this.currentProduct)
+    }
   },
 }
 </script>

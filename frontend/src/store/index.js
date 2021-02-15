@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     productList: {},
-    orderList: {},
+    orderList: [],
     product: {},
     loggedInUser: null,
     userToken: null
@@ -25,11 +25,20 @@ export default new Vuex.Store({
     },
     GetAllOrders(state, data) {
       state.orderList = data
+    },
+    AddOrder(state, data) {
+      state.orderList.push(data)
     }
   },
   getters: {
     inloggedUser: state => {
       return state.loggedInUser
+    },
+    GetProducts: state => {
+      return state.productList
+    },
+    GetOrders: state => {
+      return state.orderList
     }
   },
   actions: {
