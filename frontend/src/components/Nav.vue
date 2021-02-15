@@ -8,9 +8,9 @@
             <div class="right-side" v-if="NavBarStateUser">
                 <router-link to="/Products" v-bind:class="{activated: flagActivated('/Products')}">Products</router-link>
                 <!-- <router-link to="/" v-bind:class="{activated: flagActivated('/')}">Register me</router-link> -->
-                <img v-if="isEmpty()" id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
-                <p>{{this.inloggedUser.name}}</p>
-                <login id="login-modal" v-if="showLogin"/>
+                <img v-if="!inloggedUser" id="login" src="@/assets/icons8-customer-64.png" @click="openLogin">
+                <p v-if="inloggedUser">{{this.inloggedUser.name}}</p>
+                <login id="login-modal" v-if="showLogin && !inloggedUser"/>
                 <div class="cart-section">
                     <img id="cart" src="@/assets/icon-bag-white.svg" @click="openCart">
                     <cart id="cart-modal" v-if="showCart"/>
@@ -38,7 +38,6 @@ export default {
     data() { return {
         showCart: false,
         showLogin: false,
-        loggedIn: false,
     }},
     computed: {
         cartItemAmount() {
@@ -69,16 +68,11 @@ export default {
             this.showCart = !this.showCart
         },
         openLogin() {
-            if (this.showCart || this.loggedIn) {
+            if (this.showCart) {
                 this.showCart = false
             }
             this.showLogin = !this.showLogin
         },
-        isEmpty() {
-            console.log(this.$store.getters.inloggedUser.length)
-            if (this.$store.getters.inloggedUser.length != undefined) return false
-            return true;
-        }
     }
 }
 </script>

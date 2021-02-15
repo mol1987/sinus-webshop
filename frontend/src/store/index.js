@@ -9,7 +9,7 @@ export default new Vuex.Store({
     productList: {},
     orderList: {},
     product: {},
-    loggedInUser: {},
+    loggedInUser: null,
     userToken: null
   },
   mutations: {

@@ -96,13 +96,13 @@ export default {
       #adress-fields {
           display: flex;
           margin-top: 5px;
+          justify-content: center;
           label {
-            margin-left: 50px;
+            margin-right: 20px;
           }
           #adress-info {
             display: flex;
             flex-direction: column;
-            margin-left: 50px;
           }
       }
       h4 {
