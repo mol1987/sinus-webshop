@@ -72,7 +72,7 @@ export default new Vuex.Store({
     },
     async CreateOrder(context, payload) {
       await API.CreateOrder(payload, this.state.userToken)
-    }
+    },
   },
   modules: {
   }
