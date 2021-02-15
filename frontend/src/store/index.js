@@ -25,6 +25,11 @@ export default new Vuex.Store({
     },
     GetAllOrders(state, data) {
       state.orderList = data
+    },
+    LogoutUser(state) {
+      state.orderList = {}
+      state.loggedInUser = null
+      state.userToken = null
     }
   },
   getters: {
