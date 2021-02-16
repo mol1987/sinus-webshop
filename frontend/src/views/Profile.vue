@@ -1,17 +1,20 @@
 <template>
-    <div class="profile">
+    <main class="profile">
         <Nav id="nav"/>
 
         <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
                 <ul v-for="order in getOrderHistory" :key="order._id">
-                    <li>
-                        {{order}}
+                    <p>Date: {{toDate(order.timeStamp)}}</p>
+                    <li v-for="item in order.items" :key="item._id">
+                        {{item.title}}
+                        {{item.shortDesc}}
+                        {{item.price}} sek
                     </li>
+                    <hr>
                 </ul>
             </aside>
-
             <body id="body">
                 <label type="text" name="name" placeholder="name">{{getUser.name}}</label>
                 <label type="text" name="email" placeholder="email">{{getUser.email}}</label>
@@ -24,7 +27,7 @@
                 <label type="text" name="cvv" placeholder="cvv">{{getUser.payment.cvv}}</label> -->
             </body>
             </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -35,16 +38,15 @@ export default {
     name: "Profile",
     data() {
         return {
-            userData: {
-                //name: getUser.name
-            }
         }
     },
-
-    mounted() {
-        return this.$store.dispatch('GetAllOrders')
+    beforeCreate() {
+        
     },
-
+    mounted() {   
+        this.$store.dispatch('GetAllProducts')
+        this.$store.dispatch('GetAllOrders')
+    },
     computed: {
         getUser() {
             return this.$store.getters.inloggedUser
@@ -52,7 +54,16 @@ export default {
         getOrderHistory() {
             return this.$store.getters.GetOrders
         }
-    }
+    }, 
+    methods: {
+        toDate(ms) {
+            let date = new Date(ms)
+            // let strDate = date.toString()
+            // let index = strDate.search('GMT')
+            // return date.toString().splice(index, strDate.length)
+            return date.toDateString()
+        }
+    },
 }
 </script>
 
@@ -68,9 +79,10 @@ export default {
 .container {
     width: 100%;  
     height: 50%;
-    justify-content: center;
+    //justify-content: center;
+    background-color: snow;
     display: grid;
-    box-shadow: 0 0 2rem rgba(0,0,0,.2);
+    box-shadow: 0 0 2rem rgba(0,0,0,.6);
     grid-template-areas:
         'header header header header'
         'aside body body body'
@@ -78,23 +90,24 @@ export default {
 
         #header {
             grid-area: header;
-            background-color: hotpink;
+            //background-color: hotpink;
             border: 1px solid;
             padding: 6% 0;
         }
         #aside {
             grid-area: aside;
             border: 1px solid;
-            background-color: hotpink;
+            //background-color: hotpink;
             display: flex;
             flex-direction: column;
-            font-size: 24px;
+            font-size: 18px;
             padding: 40% 20%;
         }
         #body {
             grid-area: body;
             border: 1px solid;
-            background-color: hotpink;
+            font-size: 24px;
+            background-color: snow;
             padding: 40% 0;
         }
 }
