@@ -5,7 +5,7 @@
             <h3>Pay</h3>
             <div class="information">
                 <div class="items">   
-                    <p>Your order</p>
+                    <h3>Your order</h3>
                     <div class="board">
                             <div class="product-item-main" v-for="item in orderItems" :key="item.product.id">
                               <hr>
@@ -37,27 +37,27 @@
                     </div>
                 </div>
                 <div class="input-field">
-                        <p>Your details</p>
-                        <label for="fname">Name:</label>
-                        <input type="text" id="fname" name="fname">
-                        <label for="lname">Street:</label>
-                        <input type="text" id="lname" name="lname">
+                        <h3>Your details</h3>
+                            <label for="fname">Your name:</label>
+                            <input type="text" id="fname" name="fname">
+                            <label for="street">Street:</label>
+                            <input type="text" id="street" name="street">
                         <div class="two-inputs">
-                            <label for="lname">ZIP Code:</label>
-                            <input type="text" id="lname" name="lname">
-                            <label for="lname">City:</label>
-                            <input type="text" id="lname" name="lname">
-                        </div>
-                        <p>Your details</p>
-                        <label for="fname">Card owner:</label>
-                        <input type="text" id="fname" name="fname">
-                        <label for="lname">Card number:</label>
-                        <input type="text" id="lname" name="lname">
+                            <label for="zip">Zip code:</label>
+                            <input type="text" id="zip" name="zip">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city">
+                        </div><hr><br>
+                        <h3>Payment</h3>
+                            <label for="card-owner">Card owner:</label>
+                            <input type="text" id="card-owner" name="card-owner">
+                            <label for="card-number">Card number:</label>
+                            <input type="text" id="card-number" name="card-number">
                         <div class="two-inputs">
-                            <label for="lname">Valid until:</label>
-                            <input type="text" id="lname" name="lname">
-                            <label for="lname">CCV:</label>
-                            <input type="text" id="lname" name="lname"> 
+                            <label for="expire-date">Valid until:</label>
+                            <input type="text" id="expire-date" name="expire-date">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" name="cvv"> 
                         </div>
                         <button @click="Order">Submit</button>
                 </div>
@@ -175,13 +175,26 @@ export default {
         
     }
     .input-field {
-        width: 50%;
+        max-width: 50%;
         min-width: 400px;
         display: flex;
         flex-direction: column;
+        input {
+            margin-bottom: 15px;
+            margin-right: 10px;
+        }
         >form {
             display: flex;
             flex-direction: column;
+        }
+        button {
+            background-color: black;
+            color: white;
+            margin-top: 25px;
+            margin-left: 165px;
+            height: 40px;
+            width: 130px;
+            border-radius: 50px;
         }
     }
 }
@@ -191,5 +204,4 @@ export default {
 .make-order {
     width: 100%;
 }
-
 </style>

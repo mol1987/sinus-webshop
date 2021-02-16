@@ -1,7 +1,7 @@
 // *** This is modal component. Popups when user opens cart via navbar
 
 <template>
-    <div class="cart">
+    <main class="cart">
         <div id="arrow"></div>
         <div id="product-list">
             <div id="product-item" v-for="item in addedItems" :key="item.product.id">
@@ -31,11 +31,11 @@
                 <hr>
                 <div id="amount">
                     <slot name="amount"/>
-                    {{item.amount}}
+                    - {{item.amount}} st
                 </div>
             </div>
         </div>
-        <span>
+        <span id="total-field">
             <label>TOTAL</label>
             <p><strong>{{calculateTotal}}</strong> sek</p>
         </span>
@@ -43,7 +43,7 @@
             <img src="@/assets/icon-bag-white.svg">
             Proceed
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -84,15 +84,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: beige;
     width: 170px;
     height: 250px;
-    box-shadow: 7px 2px 8px rgba(0, 0, 0, 0.33);
+    box-shadow: 7px 2px 8px rgba(0, 0, 0, 0.45);
 
     #arrow {
         height: 1rem;
         width: 22px;
-        background-color: white;
+        background-color: beige;
         transform: rotate(45deg);
         position: relative;
         bottom: 1;
@@ -102,14 +102,20 @@ export default {
         color: white;
         font-size: 15px;
         width: 85%;
+        margin-bottom: 10px;
         border-radius: 50px;
         img {
             width: 10%;
         }
     }
     #product-list {
-        height: 180px;/* or any height you want */
+        height: 180px;
         overflow-y: auto;
+
+        #total-field {
+            display: flex;
+            flex-direction: row;
+        }
     }
     #product-item {
         display: flex;

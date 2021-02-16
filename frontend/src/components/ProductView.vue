@@ -103,18 +103,21 @@ export default {
   display: table;
 }
 .modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-  #closeBtn {
-      height: 25px;
-      width: 25px;
-      background-color: red;
-      color: white;
-  }
+    height: 100%;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+        #closeBtn {
+            height: 25px;
+            width: 25px;
+            background-color: red;
+            color: white;
+        }
 }
 .content {
   width: auto;
-  max-width: 800px;
+  max-height: 90%;
+  max-width: 70%;
   margin: 0px auto;
   padding: 0px 30px;
   background-color: rgba(247, 243, 243, 0.959);
