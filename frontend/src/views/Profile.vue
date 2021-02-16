@@ -1,13 +1,15 @@
 <template>
-    <div class="profile">
+    <main class="profile">
         <Nav id="nav"/>
 
         <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
-                <ul v-for="order in getOrderHistory" :key="order._id">
-                    <li>
-                        {{order}}
+                <ul v-for="order in orderList" :key="order._id">
+                    <li v-for="item in order" :key="item._id">
+                        {{item.title}}
+                        {{item.shortDesc}}
+                        {{item.price}} sek
                     </li>
                 </ul>
             </aside>
@@ -24,7 +26,7 @@
                 <label type="text" name="cvv" placeholder="cvv">{{getUser.payment.cvv}}</label> -->
             </body>
             </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -35,13 +37,12 @@ export default {
     name: "Profile",
     data() {
         return {
-            userData: {
-                //name: getUser.name
-            }
+            orderList: [],
         }
     },
 
     mounted() {
+        this.getProduct()
         return this.$store.dispatch('GetAllOrders')
     },
 
@@ -52,7 +53,23 @@ export default {
         getOrderHistory() {
             return this.$store.getters.GetOrders
         }
-    }
+    }, 
+    methods: {
+        getProduct() {
+            this.orderList = this.getOrderHistory
+            for (let index = 0; index < this.getOrderHistory.length; index++) {
+                let temp = [] 
+                
+                this.getOrderHistory[index].items.forEach(e => {
+                    const product = this.$store.getters.GetOneProduct(e._id)
+                    temp.push(product)
+                })
+                this.orderList[index].items = temp
+            }
+
+            console.log('orderList ', this.orderList)
+        }
+    },
 }
 </script>
 
@@ -68,9 +85,10 @@ export default {
 .container {
     width: 100%;  
     height: 50%;
-    justify-content: center;
+    //justify-content: center;
+    background-color: snow;
     display: grid;
-    box-shadow: 0 0 2rem rgba(0,0,0,.2);
+    box-shadow: 0 0 2rem rgba(0,0,0,.6);
     grid-template-areas:
         'header header header header'
         'aside body body body'
@@ -78,23 +96,24 @@ export default {
 
         #header {
             grid-area: header;
-            background-color: hotpink;
+            //background-color: hotpink;
             border: 1px solid;
             padding: 6% 0;
         }
         #aside {
             grid-area: aside;
             border: 1px solid;
-            background-color: hotpink;
+            //background-color: hotpink;
             display: flex;
             flex-direction: column;
-            font-size: 24px;
+            font-size: 18px;
             padding: 40% 20%;
         }
         #body {
             grid-area: body;
             border: 1px solid;
-            background-color: hotpink;
+            font-size: 24px;
+            background-color: snow;
             padding: 40% 0;
         }
 }

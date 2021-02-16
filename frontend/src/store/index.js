@@ -56,6 +56,9 @@ export default new Vuex.Store({
     },
     GetCart: state => {
       return state.cartList
+    },
+    GetOneProduct: state => id => {
+      return state.productList.find(f => f._id == id)
     }
   },
   actions: {
