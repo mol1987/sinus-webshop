@@ -7,23 +7,24 @@
                 <div class="items">   
                     <p>Your order</p>
                     <div class="board">
-                            <div class="product-item-main" v-for="item in orderItems" :key="item.id">
+                            <div class="product-item-main" v-for="item in orderItems" :key="item.product.id">
                               <hr>
                                <div class="product-item">
                                     <div class="left">
                                         <div class="img-board">
                                              <!-- <img :src="getImage(item.imgFile)"> -->
-                                             <img :src="getImage(item.imgFile)" :alt="tom">
+                                             <img :src="getImage(item.product.imgFile)" :alt="tom">
                                         </div>
                                         <div class="text-two-part">
-                                            <h3>Gretas Fury</h3>
-                                            <p>Unisex</p>
+                                            <h3>{{item.product.title}}</h3>
+                                            <p>{{item.product.shortDesc}}</p>
                                         </div>
                                     </div>
                                     <div class="right">
                                         <div class="text-two-part">
-                                            <p>999 kr</p>
-                                            <p>123141245</p>
+                                            <p>{{item.amount}}</p>
+                                            <p>{{item.product.price}} kr</p>
+                                            <p>{{item.product.serial}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -31,36 +32,34 @@
                         <div class="line"></div>
                         <div class="total-part">
                             <h3>Total</h3>
-                            <p>12312 kr</p>
+                            <p>{{totalPrice}} kr</p>
                         </div>
                     </div>
                 </div>
                 <div class="input-field">
-                    <form>
                         <p>Your details</p>
                         <label for="fname">Name:</label>
                         <input type="text" id="fname" name="fname">
-                        <label for="lname">Email:</label>
+                        <label for="lname">Street:</label>
                         <input type="text" id="lname" name="lname">
                         <div class="two-inputs">
-                            <label for="lname">Password:</label>
+                            <label for="lname">ZIP Code:</label>
                             <input type="text" id="lname" name="lname">
-                            <label for="lname">Password:</label>
+                            <label for="lname">City:</label>
                             <input type="text" id="lname" name="lname">
                         </div>
                         <p>Your details</p>
-                        <label for="fname">Name:</label>
+                        <label for="fname">Card owner:</label>
                         <input type="text" id="fname" name="fname">
-                        <label for="lname">Email:</label>
+                        <label for="lname">Card number:</label>
                         <input type="text" id="lname" name="lname">
                         <div class="two-inputs">
-                            <label for="lname">Password:</label>
+                            <label for="lname">Valid until:</label>
                             <input type="text" id="lname" name="lname">
-                            <label for="lname">Password:</label>
+                            <label for="lname">CCV:</label>
                             <input type="text" id="lname" name="lname"> 
                         </div>
-                        <input type="submit" value="Submit">
-                    </form>
+                        <button @click="Order">Submit</button>
                 </div>
             </div>
         </div>
@@ -71,45 +70,56 @@
 import Nav from '@/components/Nav'
 
 export default {
-    name: " ",
+    name: "MakeOrder",
     components: {
         Nav
     },
     data() {
         return {
-            orderItems: [  
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            },
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            }, 
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            } 
-            ]
+            // orderItems: [  
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // },
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // }, 
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // } 
+            // ]
         }
+    },
+    computed: {
+        orderItems() {
+            return this.$store.getters.GetCart
+        },
+        totalPrice() {
+            return this.orderItems.reduce((a, b) => a + (b.price || 0), 0);
+        },
     },
     methods: {
         getImage(path) {
               return require(`../assets/${path}`)
+        },
+        Order() {
+            this.$store.dispatch('CreateOrder')
         }
-    }
+    },
 }
 </script>
 

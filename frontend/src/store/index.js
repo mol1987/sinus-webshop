@@ -42,6 +42,9 @@ export default new Vuex.Store({
       } else {
         state.cartList.push({product: data, amount: 1})
       }
+    },
+    CreateOrder(state) {
+      state.cartList = []
     }
   },
   getters: {
@@ -104,10 +107,9 @@ export default new Vuex.Store({
           order.items.push(e.product._id)
         }
       })
-      //this.state.cartList.forEach(e => order.items.push({productId: e.product.serial, amount: e.amount}))
       const result = await API.CreateOrder(order, this.state.userToken)
-
-      console.log(result, order, context, orderValue)
+      context.commit('CreateOrder')
+      console.log(result)
     }
   },
   modules: {
