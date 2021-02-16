@@ -123,6 +123,7 @@ export default {
 
 .Nav {
     width: 100%;
+    padding: 0;
 }
 
 .right-side {
@@ -137,12 +138,16 @@ export default {
         top: 55px;
         right: 60px;        
         z-index: 10;
+        cursor: pointer;
     }
     #profilePopup-modal {
         position: absolute;
         top: 55px;
         right: 70px;        
         z-index: 10;
+    }
+    p {
+        cursor: pointer;
     }
 
 .nav-bar {
@@ -179,6 +184,7 @@ button {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    cursor: pointer;
 
     .circle-number {
         display: flex;

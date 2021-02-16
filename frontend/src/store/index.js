@@ -80,10 +80,9 @@ export default new Vuex.Store({
     async AuthenticateUser(context, payload) {
       const result = await API.AuthenticateUser(payload)
       context.commit('AuthenticateUser', result)
-      console.log('Molle wants result',result)
     },
     async RegisterUser(context, payload) {
-      console.log(payload)
+      console.log('received data from fields ', payload)
       const result = await API.RegisterUser(payload)
       console.log(result)
     },

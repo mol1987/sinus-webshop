@@ -22,6 +22,13 @@
             </div>
         </div>
         <hr>
+        <!-- <div id="payment-fields">
+          <p>Payment information: </p>
+          <input type="text" id="card-owner" v-model="userData.payment.cardOwner" placeholder="card owner">
+          <input type="text" id="card-number" v-model="userData.payment.cardNumber" placeholder="card number">
+          <input type="text" id="expire-date" v-model="userData.payment.validUntil" placeholder="expire date">
+          <input type="text" id="cvv" v-model="userData.payment.cvv" placeholder="cvv">
+        </div> -->
       </form>
       <div id="btn-div">
           <button @click="registerUser">Register</button>
@@ -52,6 +59,12 @@ export default {
             zip: '',
             city: ''
           },
+        // payment: {
+        //     cardOwner: '',
+        //     cardNumber: '',
+        //     validUntil: '',
+        //     cvv: ''
+        // },
         }, 
         // *** This data is just to reset input fields when cancel button is clicked.
         initialState: {
@@ -65,14 +78,20 @@ export default {
             zip: '',
             city: ''
           },
+        // payment: {
+        //   cardOwner: '"Johan Kivi"',
+        //   cardNumber: '',
+        //   validUntil: '',
+        //   cvv: ''
+        // },
         }
       }
     },
   methods: {
     registerUser() {
-      console.log(this.userData)
       this.$store.dispatch('RegisterUser', this.userData)
       alert('You have been registered! Thank you!')
+      this.userData = this.initialState
     },
     cancel() {
       this.userData = this.initialState
