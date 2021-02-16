@@ -37,7 +37,8 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: beige;
+    border-radius: 15px;
     width: 200px;
     height: 110px;
     box-shadow: 7px 2px 8px rgba(0, 0, 0, 0.33);
@@ -50,7 +51,7 @@ export default {
     #arrow {
         height: 1rem;
         width: 15px;
-        background-color: white;
+        background-color: beige;
         transform: rotate(45deg);
         position: relative;
         bottom: 12%;
