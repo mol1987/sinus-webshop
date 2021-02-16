@@ -1,21 +1,19 @@
 <template>
     <div class="profile">
+        <Nav id="nav"/>
+
+        <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
-                <!-- <a href="order-history">View order history</a>
-                <a href="personal">Personal info</a>
-                <a href="delivery">Delivery info</a>
-                <a href="payment">Payment info</a> -->
-
-                <ul v-for="getUser.orderHistory" :key="getUser._id">
+                <ul v-for="order in getUser.orderHistory" :key="order._id">
                     <li>
-                        {{getUser.orderHistory.title}}
+                        {{order.orderHistory.title}}
                     </li>
                 </ul>
             </aside>
+
             <body id="body">
                 <label type="text" name="name" placeholder="name">{{getUser.name}}</label>
-                <!-- <label type="text" name="password" placeholder="password">{{getUser.password}}</label> -->
                 <label type="text" name="email" placeholder="email">{{getUser.email}}</label>
                 <label type="text" name="street" placeholder="street">{{getUser.adress.street}}</label>
                 <label type="number" name="zip" placeholder="zip">{{getUser.adress.zip}}</label>
@@ -25,14 +23,15 @@
                 <label type="text" name="validUntil" placeholder="expire date">{{getUser.payment.validUntil}}</label>
                 <label type="text" name="cvv" placeholder="cvv">{{getUser.payment.cvv}}</label> -->
             </body>
-            <footer id="footer">
-                dfg
-            </footer>
+            </div>
     </div>
 </template>
 
 <script>
+import Nav from '../components/Nav.vue'
+
 export default {
+  components: { Nav },
     name: "Profile",
     data() {
         return {
@@ -45,44 +44,54 @@ export default {
     computed: {
         getUser() {
             return this.$store.getters.inloggedUser
+        },
+        getOrderHistory() {
+            return this.$store.getters.GetOrders
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+#nav {
+    padding: 0 !important;
+}
 .profile {
     width: 100%;  
     height: 100%;
+    justify-content: center;
+}
+.container {
+    width: 100%;  
+    height: 50%;
+    justify-content: center;
     display: grid;
+    box-shadow: 0 0 2rem rgba(0,0,0,.2);
     grid-template-areas:
         'header header header header'
         'aside body body body'
-        'aside body body body'
-        'footer footer footer footer';
+        'aside body body body';
 
         #header {
             grid-area: header;
-            background-color: lightgreen;
+            background-color: hotpink;
+            border: 1px solid;
             padding: 6% 0;
         }
         #aside {
             grid-area: aside;
-            background-color: orange;
+            border: 1px solid;
+            background-color: hotpink;
             display: flex;
             flex-direction: column;
             font-size: 24px;
+            padding: 40% 20%;
         }
         #body {
             grid-area: body;
-            background-color: lightblue;
-            padding: 40% 0;
-        }
-        #footer {
-            grid-area: footer;
+            border: 1px solid;
             background-color: hotpink;
-            height: 20%;
-            padding: 6% 0;
+            padding: 40% 0;
         }
 }
 </style>
