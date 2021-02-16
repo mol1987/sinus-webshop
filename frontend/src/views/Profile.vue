@@ -5,9 +5,9 @@
         <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
-                <ul v-for="order in getUser.orderHistory" :key="order._id">
+                <ul v-for="order in getOrderHistory" :key="order._id">
                     <li>
-                        {{order.orderHistory.title}}
+                        {{order}}
                     </li>
                 </ul>
             </aside>
@@ -39,6 +39,10 @@ export default {
                 //name: getUser.name
             }
         }
+    },
+
+    mounted() {
+        return this.$store.dispatch('GetAllOrders')
     },
 
     computed: {
