@@ -5,15 +5,16 @@
         <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
-                <ul v-for="order in orderList" :key="order._id">
-                    <li v-for="item in order" :key="item._id">
+                <ul v-for="order in getOrderHistory" :key="order._id">
+                    <p>Date: {{toDate(order.timeStamp)}}</p>
+                    <li v-for="item in order.items" :key="item._id">
                         {{item.title}}
                         {{item.shortDesc}}
                         {{item.price}} sek
                     </li>
+                    <hr>
                 </ul>
             </aside>
-
             <body id="body">
                 <label type="text" name="name" placeholder="name">{{getUser.name}}</label>
                 <label type="text" name="email" placeholder="email">{{getUser.email}}</label>
@@ -37,15 +38,15 @@ export default {
     name: "Profile",
     data() {
         return {
-            orderList: [],
         }
     },
-
-    mounted() {
-        this.getProduct()
-        return this.$store.dispatch('GetAllOrders')
+    beforeCreate() {
+        
     },
-
+    mounted() {   
+        this.$store.dispatch('GetAllProducts')
+        this.$store.dispatch('GetAllOrders')
+    },
     computed: {
         getUser() {
             return this.$store.getters.inloggedUser
@@ -55,19 +56,12 @@ export default {
         }
     }, 
     methods: {
-        getProduct() {
-            this.orderList = this.getOrderHistory
-            for (let index = 0; index < this.getOrderHistory.length; index++) {
-                let temp = [] 
-                
-                this.getOrderHistory[index].items.forEach(e => {
-                    const product = this.$store.getters.GetOneProduct(e._id)
-                    temp.push(product)
-                })
-                this.orderList[index].items = temp
-            }
-
-            console.log('orderList ', this.orderList)
+        toDate(ms) {
+            let date = new Date(ms)
+            // let strDate = date.toString()
+            // let index = strDate.search('GMT')
+            // return date.toString().splice(index, strDate.length)
+            return date.toDateString()
         }
     },
 }
