@@ -36,7 +36,7 @@ export async function CreateNewProduct(data, token) {
 }
 
 export async function DeleteProduct(id, token) { 
-    await fetch('http://localhost:5000/api/products/' + id, 
+    const req = await fetch('http://localhost:5000/api/products/' + id, 
     {method: 'DELETE',
     headers:{
         'Accept': 'application/json',
@@ -44,6 +44,8 @@ export async function DeleteProduct(id, token) {
         'Authorization': token
         }
      })
+     const dataReq = await req.json()
+    return dataReq 
 }
 
 export async function RegisterUser(data) { 
@@ -67,7 +69,6 @@ export async function AuthenticateUser(data) {
     },
     body: JSON.stringify(data)} )
     const dataReq = await req.json()
-    console.log(dataReq)
     return dataReq    
 }
 
@@ -85,7 +86,7 @@ export async function GetAllOrders(token) {
 }
 
 export async function CreateOrder(data, token) { 
-    await fetch('http://localhost:5000/api/orders/', 
+    const req = await fetch('http://localhost:5000/api/orders/', 
     {method: 'POST',
     headers:{
         'Accept': 'application/json',
@@ -93,4 +94,6 @@ export async function CreateOrder(data, token) {
         'Authorization': token
     },
      body: JSON.stringify(data)} )
+    const reqData = await req.json()
+    return reqData
 }

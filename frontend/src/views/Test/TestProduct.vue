@@ -98,12 +98,7 @@ export default {
       this.$store.dispatch("GetAllOrders")
     },
     OnSubmitCreateOrder() {
-      this.$store.dispatch("CreateOrder", {
-        timeStamp: Date.now(), 
-        status: 'inProcess',
-        items: [ this.getProduct ], // Array of product IDs
-        orderValue: 999
-      })
+      this.$store.dispatch("CreateOrder")
     }
   },
   created() {

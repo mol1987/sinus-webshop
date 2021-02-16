@@ -36,7 +36,6 @@
 import Nav from '@/components/Nav.vue'
 import ProductCard from '../components/ProductCard.vue'
 import ProductView from '../components/ProductView.vue'
-import Products from '/database/productsSeed.json'
 
 export default {
     name: "Products",
@@ -47,8 +46,12 @@ export default {
   },
   data() {
     return {
-      products: Products,
       currentProduct: null,
+    }
+  },
+  computed: {
+    products() {
+      return this.$store.getters.GetProducts
     }
   },
   methods: {
@@ -61,9 +64,12 @@ export default {
       this.currentProduct = null
     },
     AddToCart() {
-      this.$store.commit('AddOrder', this.currentProduct)
+      this.$store.commit('AddToCart', this.currentProduct)
     }
   },
+  beforeCreate() {
+    this.$store.dispatch('GetAllProducts')
+  }
 }
 </script>
 

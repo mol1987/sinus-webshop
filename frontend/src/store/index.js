@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     productList: {},
-    orderList: [],
+    orderList: {},
+    cartList: [],
     product: {},
     loggedInUser: null,
     userToken: null
@@ -26,8 +27,13 @@ export default new Vuex.Store({
     GetAllOrders(state, data) {
       state.orderList = data
     },
-    AddOrder(state, data) {
-      state.orderList.push(data)
+    AddToCart(state, data) {
+      let index = state.cartList.findIndex(f => f.product.serial == data.serial)
+      if (index >= 0) {
+        state.cartList[index].amount++;
+      } else {
+        state.cartList.push({product: data, amount: 1})
+      }
     }
   },
   getters: {
@@ -39,6 +45,9 @@ export default new Vuex.Store({
     },
     GetOrders: state => {
       return state.orderList
+    },
+    GetCart: state => {
+      return state.cartList
     }
   },
   actions: {
@@ -73,9 +82,25 @@ export default new Vuex.Store({
     async GetAllOrders(context) {
       const result = await API.GetAllOrders(this.state.userToken)
       context.commit('GetAllOrders', result)
+      console.log(result)
     },
-    async CreateOrder(context, payload) {
-      await API.CreateOrder(payload, this.state.userToken)
+    async CreateOrder(context) {
+      let orderValue = this.state.cartList.reduce((a, b) => a + (b.product.price || 0), 0);
+      let order = {
+        timeStamp: Date.now(),
+        status: 'inProcess',
+        items: [],
+        orderValue: orderValue
+      }
+      this.state.cartList.forEach(e => {
+        for (let i = 0; i < e.amount; i++) {
+          order.items.push(e.product._id)
+        }
+      })
+      //this.state.cartList.forEach(e => order.items.push({productId: e.product.serial, amount: e.amount}))
+      const result = await API.CreateOrder(order, this.state.userToken)
+
+      console.log(result, order, context, orderValue)
     }
   },
   modules: {
