@@ -29,7 +29,6 @@ export default new Vuex.Store({
         let temp = [] 
         
         data[index].items.forEach(e => {
-          console.log('e ',e)
             const product = state.productList.find(f => f._id == e)
             temp.push(product)
         })
@@ -72,11 +71,8 @@ export default new Vuex.Store({
       return state.cartList
     },
     GetOneProduct: state => id => {
-      console.log("hej")
       //let prod = state.productList.find(f => f._id == id)
-      console.log('prod', prod)
       let prod = state.dispatch('GetProduct', id)
-      console.log('prod', prod)
       return prod
     }
   },
