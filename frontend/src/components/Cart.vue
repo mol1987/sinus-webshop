@@ -4,7 +4,7 @@
     <div class="cart">
         <div id="arrow"></div>
         <div id="product-list">
-            <div id="product-item" v-for="item in addedItems" :key="item.id">
+            <div id="product-item" v-for="item in addedItems" :key="item.product.id">
                 <div id="imgFile">
                     <slot name="imgFile"/>
                     <img src="@/assets/skateboard-greta.png">
@@ -13,20 +13,25 @@
                 <div id="item-info">
                     <div id="title">
                         <slot name="title"/>
-                        {{item.title}}
+                        {{item.product.title}}
                     </div>
                     <div id="shortDesc">
                         <slot name="shortDesc"/>
-                        {{item.shortDesc}}
+                        {{item.product.shortDesc}}
                     </div>
                     <div id="serial">
                         <slot name="serial"/>
-                        {{item.serial}}
+                        {{item.product.serial}}
                     </div>
                 </div>
                 <div id="price">
                     <slot name="price"/>
-                    {{item.price}}
+                    {{item.product.price}}
+                </div>
+                <hr>
+                <div id="amount">
+                    <slot name="amount"/>
+                    {{item.amount}}
                 </div>
             </div>
         </div>
@@ -34,7 +39,7 @@
             <label>TOTAL</label>
             <p><strong>{{calculateTotal}}</strong> sek</p>
         </span>
-        <div id="btn">
+        <div id="btn" @click="$emit('proceed')">
             <img src="@/assets/icon-bag-white.svg">
             Proceed
         </div>
@@ -56,13 +61,13 @@ export default {
         calculateTotal() {
             if (this.addedItems != null) {
                 this.addedItems.forEach(e => {
-                    this.total += e.price
+                    this.total += e.product.price
                 });
             }
             return this.total
         },
         addedItems() {
-            return this.$store.getters.GetOrders
+            return this.$store.getters.GetCart
         }
     }
 }

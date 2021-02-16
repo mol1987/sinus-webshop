@@ -14,7 +14,7 @@
                 <login id="login-modal" v-if="showLogin && !inloggedUser"/>
                 <div class="cart-section">
                     <img id="cart" src="@/assets/icon-bag-white.svg" @click="openCart">
-                    <cart id="cart-modal" v-if="showCart"/>
+                    <cart id="cart-modal" v-if="showCart" v-on:proceed="ProceedBuy"/>
                     <div class="circle-number"><p>{{cartItemAmount}}</p></div>
                 </div>
             </div>
@@ -48,7 +48,15 @@ export default {
     }},
     computed: {
         cartItemAmount() {
-            return 2
+            let cart = this.$store.getters.GetCart
+            console.log(cart)
+            let amount = 0
+            if (cart != null) {
+                cart.forEach(element => {
+                    amount += element.amount
+                });
+            }
+            return amount
         },
         NavBarStateAdmin() {
             if (this.navBarState == 'admin') return true
@@ -91,6 +99,13 @@ export default {
                 this.showCart = false
             }
             this.inlogged = !this.inlogged
+        },
+        ProceedBuy() {
+            if (this.$store.getters.inloggedUser) {
+                this.$router.push('BuyView')
+            } else {
+                this.$router.push('MakeOrder')
+            }
         }
     }
 }

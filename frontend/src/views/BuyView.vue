@@ -7,23 +7,25 @@
                 <div class="items">   
                     <p>Items</p><hr>
                     <div class="board">
-                            <div class="product-item-main" v-for="item in orderItems" :key="item.id">
+                            <div class="product-item-main" v-for="item in orderItems" :key="item.product.id">
                               <hr>
                                <div class="product-item">
                                     <div class="left">
                                         <div class="img-board">
                                              <!-- <img :src="getImage(item.imgFile)"> -->
-                                             <img :src="getImage(item.imgFile)" :alt="tom">
+                                             <img :src="getImage(item.product.imgFile)" :alt="tom">
                                         </div>
                                         <div class="text-two-part">
-                                            <h3>Gretas Fury</h3>
-                                            <p>Unisex</p>
+                                            <h3>{{item.product.title}}</h3>
+                                            <p>{{item.product.shortDesc}}</p>
                                         </div>
                                     </div>
                                     <div class="right">
                                         <div class="text-two-part">
-                                            <p>999 kr</p>
-                                            <p>123141245</p>
+                                            <p>{{item.product.price}}</p>
+                                            <p>{{item.product._id}}</p>
+                                            <p>Amount: </p>
+                                            <p>{{item.amount}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +33,7 @@
                         <div class="line"></div>
                         <div class="total-part">
                             <h3>Total</h3>
-                            <p>12312 kr</p>
+                            <p>{{totalPrice}} kr</p>
                         </div>
                     </div>
                 </div>
@@ -39,17 +41,17 @@
                     <form>
                         <p>Delivery</p><hr>
                         <label for="fname">Name:</label>
-                        <input type="text" id="fname" name="fname">
+                        <input type="text" id="fname" v-model="user.name">
                         <label for="street">Street adress:</label>
-                        <input type="text" id="street" name="street">
+                        <input type="text" id="street" v-model="user.adress.street">
                         <div class="two-inputs">
                             <div id="city-info">
                                 <label for="city">City:</label>
-                                <input type="text" id="city" name="city">
+                                <input type="text" id="city" v-model="user.adress.city" >
                             </div>
                             <div id="zip-info">
                                 <label for="zip">Zip Code:</label>
-                                <input type="text" id="zip" name="zip">
+                                <input type="text" id="zip" v-model="user.adress.zip" >
                             </div>
                         </div>
                     </form>
@@ -73,8 +75,8 @@
                         </div>
                     </form>
                     <div id="buttons">
-                        <button>Pay Now</button>
-                        <button>Continue shopping</button>
+                        <button @click="GotoPay">Pay Now</button>
+                        <button @click="GotoContinueShopping">Continue shopping</button>
                     </div>
                 </div>
             </div>
@@ -92,39 +94,58 @@ export default {
     },
     data() {
         return {
-            orderItems: [  
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            },
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            }, 
-            {
-                _id: '39y7gbbZk1u4ABnv', // generated serverside
-                title: 'Gretas Fury',
-                price: 999,
-                shortDesc: 'Unisex',
-                longDesc: 'Skate ipsum dolor sit amet...',
-                imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            } 
-            ]
+            // orderItems: [  
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // },
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // }, 
+            // {
+            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
+            //     title: 'Gretas Fury',
+            //     price: 999,
+            //     shortDesc: 'Unisex',
+            //     longDesc: 'Skate ipsum dolor sit amet...',
+            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
+            // } 
+            // ]
         }
     },
     methods: {
         getImage(path) {
               return require(`../assets/${path}`)
+        },
+        GotoPay() {
+            this.$store.dispatch('CreateOrder')
+            // this.$router.push('')
+        },
+        GotoContinueShopping() {
+            this.$router.push('Products')
+        }
+    },
+    computed: {
+        orderItems() {
+            return this.$store.getters.GetCart
+        },
+        totalPrice() {
+            return this.orderItems.reduce((a, b) => a + (b.price || 0), 0);
+        },
+        user() {
+            return this.$store.getters.inloggedUser
         }
     }
+
 }
 </script>
 
