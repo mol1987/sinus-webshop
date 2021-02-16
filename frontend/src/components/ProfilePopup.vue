@@ -14,6 +14,7 @@
         methods: {
             logout() {
                 this.$store.commit('LogoutUser' )
+                this.$router.push('/'); 
                 alert('You have been logged out')
             }
         },
