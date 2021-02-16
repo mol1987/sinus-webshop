@@ -7,7 +7,7 @@
             
             <!-- *** For each object in products display product-card component *** -->
             <div class="product-container" v-for="product in products" :key="product.id">
-                <product-card v-on:clicked-card="currentProduct = product" id="product-card"/>
+                <product-card v-on:clicked-card="currentProduct = product" id="product-card" v-bind:product="product"/>
             </div>
 
             <!-- *** This is product-view template which uses with the slots of ProductView modal component *** -->

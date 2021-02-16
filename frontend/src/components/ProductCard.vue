@@ -1,31 +1,33 @@
-// *** This component is a product card template. This model is uses in the Product component
+// *** This component is a product card template. This model is used in the Product component
 
 <template>
     <!-- *** Click event emits to Product.vue (parent) clicked-card event *** -->
-    <div class="card" @click="$emit('clicked-card')">
-        <div id="top">
-            <h4 id="header">{{products[0].title}}</h4>
-            <img id="icon" src="@/assets/icon-bag-black.svg">
+    <main>
+        <div class="card" @click="$emit('clicked-card')">
+            <div id="top">
+                <h4 id="header">{{product.title}}</h4>
+                <img id="icon" src="@/assets/icon-bag-black.svg">
+            </div>
+            <label>{{product.shortDesc}}</label>
+            <div id="picture-container">
+                <div id="price">{{product.price}} sek</div>
+                <img :src="getImage(product.imgFile)">
+            </div>
         </div>
-        <label>{{products[0].shortDesc}}</label>
-        <div id="picture-container">
-            <div id="price">{{products[0].price}} sek</div>
-            <!-- <img v-bind:src="'@/assets/' + getImage"/>  -->
-            <img src="@/assets/skateboard-generic.png">
-        </div>
-    </div>
+    </main>
 </template>
 
 <script>
-// *** Import Products from database json file *** 
-import Products from '/database/productsSeed.json'
-
 export default {
     name: 'ProductCard',
-    data() {
-        return {
-            products: Products
-        }
+    props: {
+        product: null
+    },
+
+    methods: {
+        getImage(path) {          
+            return require(`../assets/${path}`)
+        },
     },
 }
 </script>
