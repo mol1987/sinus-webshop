@@ -65,6 +65,7 @@ export default {
     },
     AddToCart() {
       this.$store.commit('AddToCart', this.currentProduct)
+      this.closePopup()
     }
   },
   beforeCreate() {
