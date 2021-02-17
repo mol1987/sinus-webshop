@@ -49,10 +49,10 @@ export default {
         align-self: flex-start;
         width: 100%;
     }
-    #icon {
+        #icon {
         align-self: flex-end;
         // left: 15px;
-        width: 20%;
+        width: 35px;
     }
 }
 label {
