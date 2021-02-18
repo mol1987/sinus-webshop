@@ -6,13 +6,17 @@
       <form>
         <h3>Register</h3>
         <label for="fname">Full name:</label><br>
-        <input type="text" id="fname" name="fname" v-model="userData.name"><br>
+        <input type="text" id="fname" name="fname" v-model="userData.name">
+        <p id="errorMsg" v-if="errors.name">Please enter your full name</p><br>
         <label for="lname">Email:</label><br>
-        <input type="text" id="email" name="email"  v-model="userData.email"><br>
+        <input type="text" id="email" name="email"  v-model="userData.email">
+        <p id="errorMsg" v-if="errors.email">Please enter your email</p><br>
         <label for="lname">Password:</label><br>
-        <input type="password" id="password" name="password"  v-model="userData.password"><br>
+        <input type="password" id="password" name="password"  v-model="userData.password">
+        <p id="errorMsg" v-if="errors.password">Please enter at least 3 characters</p><br>
         <label for="lname">Confirm password:</label><br>
-        <input type="password" id="confirmPass" name="confirmPass"  v-model="userData.repeatPassword"><hr>
+        <input type="password" id="confirmPass" name="confirmPass"  v-model="userData.repeatPassword">
+        <p id="errorMsg" v-if="errors.repeatPassword">Your password does not match</p><hr>
         <div id="adress-fields">
             <label for="adress">Adress: </label>
             <div id="adress-info">
@@ -66,6 +70,13 @@ export default {
         //     cvv: ''
         // },
         }, 
+        // *** errors to check each user input field
+        errors: {
+          name: false,
+          email: false,
+          password: false,
+          repeatPassword: false,
+        },
         // *** This data is just to reset input fields when cancel button is clicked.
         initialState: {
           email: '',
@@ -89,9 +100,23 @@ export default {
     },
   methods: {
     registerUser() {
-      this.$store.dispatch('RegisterUser', this.userData)
-      alert('You have been registered! Thank you!')
-      this.userData = this.initialState
+        if (this.userData.name == '') {
+          this.errors.name = true
+        }else this.errors.name = false
+        if (this.userData.email == '' ) {
+          this.errors.email = true
+        }else this.errors.email = false
+        if (this.userData.password.length < 3) {
+          this.errors.password = true
+        }
+        if (this.userData.repeatPassword !== this.userData.password) {
+          this.errors.repeatPassword = true
+        }
+        if (this.errors.name == false && this.errors.email == false && this.errors.password == false && this.errors.repeatPassword == false) {
+          this.$store.dispatch('RegisterUser', this.userData)
+        alert('You have been registered! Thank you!')
+        this.userData = this.initialState
+        }
     },
     cancel() {
       this.userData = this.initialState
@@ -136,6 +161,9 @@ export default {
           width: 75px;
           border-radius: 50px;
       }
+  }
+  #errorMsg {
+    color: red;
   }
 }
 .skate-img {
