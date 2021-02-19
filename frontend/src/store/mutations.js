@@ -44,5 +44,20 @@ export default {
     },
     CreateOrder(state) {
         state.cartList = []
-    }
+    },
+    CreateNewProduct(state, data) {
+        if (data.data != null) {
+          state.productList.push(data.data)
+          alert('Product Created!')
+        } else {
+          alert('Product could not be created')
+        }
+      },
+    UpdateProduct(state, data) {
+        if (data.data != null) {
+          alert('Product edited!')
+        } else {
+          alert('Product could not be edited')
+        }
+      }
 }

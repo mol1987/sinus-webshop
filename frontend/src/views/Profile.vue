@@ -60,9 +60,6 @@ export default {
     methods: {
         toDate(ms) {
             let date = new Date(ms)
-            // let strDate = date.toString()
-            // let index = strDate.search('GMT')
-            // return date.toString().splice(index, strDate.length)
             return date.toDateString()
         },
          getImage(path) {          

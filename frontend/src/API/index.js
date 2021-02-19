@@ -13,7 +13,7 @@ export async function GetProduct(id) {
 }
 
 export async function UpdateProduct(data, token) { 
-    await fetch('http://localhost:5000/api/products/' + data._id, 
+    const req = await fetch('http://localhost:5000/api/products/' + data._id, 
    {method: 'PATCH',
     headers:{
         'Accept': 'application/json',
@@ -21,6 +21,8 @@ export async function UpdateProduct(data, token) {
         'Authorization': token
     },
    body: JSON.stringify(data)})
+   const reqData = await req.json()
+   return reqData
 }
 
 export async function CreateNewProduct(data, token) { 
