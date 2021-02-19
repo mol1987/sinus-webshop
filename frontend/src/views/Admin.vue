@@ -9,16 +9,28 @@
                     <div class="line"></div>
                 </div>
                 <div class="box" v-for="order in orders" :key="order._id">
-                    <button type="button" class="collapsible">
-                        <p>{{order.timeStamp}}</p>
-                        <p>{{order.status}}</p>
-                        <p>{{order.orderValue}}</p>
-                    </button>
-                    <div class="content">
+                    <vsa-list>
+                    <!-- Here you can use v-for to loop through items  -->
+                    <vsa-item>
+                        <vsa-heading>
+                        <p>Date: {{toDate(order.timeStamp)}}</p>
+                        <p>Cost: {{order.orderValue}}</p>
+                        <p>Id: {{order._id}}</p>
+                        </vsa-heading>
+
+                        <vsa-content>
                         <ul v-for="(item, index) in order.items" :key="index">
-                            <li>{{item}}</li> 
+                            <div class="img-class">
+                                <img :src="getImage(item.imgFile)">
+                            </div>
+                            <li>Title: {{item.title}}</li> 
+                            <li>Price: {{item.price}}</li> 
+                            <li>Short Description: {{item.shortDesc}}</li> 
+                            <li>Long Description: {{item.longDesc}}</li> 
                         </ul>
-                    </div>
+                        </vsa-content>
+                    </vsa-item>
+                    </vsa-list>
                 </div>
             </div>
 
@@ -27,16 +39,29 @@
                     <p>DONE</p>
                     <div class="line"></div>
                 </div>
-                <div class="box" v-for="order in doneOrders" :key="order._id">
-                    <p>{{order.timeStamp}}</p>
-                    <p>{{order.status}}</p>
-                    <p>{{order.orderValue}}</p>
-                    <ul v-for="(item, index) in order.items" :key="index">
-                       <li>{{item}}</li>
-                       <li>{{item}}</li> 
-                       <li>{{item}}</li>
-                       <li>{{item}}</li>   
-                    </ul>
+               <div class="box" v-for="order in doneOrders" :key="order._id">
+                    <vsa-list>
+                    <!-- Here you can use v-for to loop through items  -->
+                    <vsa-item>
+                        <vsa-heading>
+                        <p>Date: {{toDate(order.timeStamp)}}</p>
+                        <p>Cost: {{order.orderValue}}</p>
+                        <p>Id: {{order._id}}</p>
+                        </vsa-heading>
+
+                        <vsa-content>
+                        <ul v-for="(item, index) in order.items" :key="index">
+                            <div class="img-class">
+                                <img :src="getImage(item.imgFile)">
+                            </div>
+                            <li>Title: {{item.title}}</li> 
+                            <li>Price: {{item.price}}</li> 
+                            <li>Short Description: {{item.shortDesc}}</li> 
+                            <li>Long Description: {{item.longDesc}}</li> 
+                        </ul>
+                        </vsa-content>
+                    </vsa-item>
+                    </vsa-list>
                 </div>
             </div>
         </div>
@@ -45,11 +70,24 @@
 
 <script>
 import Nav from '@/components/Nav'
+import {
+  VsaList,
+  VsaItem,
+  VsaHeading,
+  VsaContent,
+//   VsaIcon
+} from 'vue-simple-accordion';
+import 'vue-simple-accordion/dist/vue-simple-accordion.css';
 
 export default {
     name: "Admin",
     components: {
-        Nav
+        Nav,
+        VsaList,
+        VsaItem,
+        VsaHeading,
+        VsaContent,
+        // VsaIcon
     },
     mounted() {
         this.$store.dispatch('GetAllProducts')
@@ -74,35 +112,50 @@ export default {
                 }
             return data
         }
+    },
+    methods: {
+    // Just get an image from the assets. Should be reassigned by the fetch or axios later on.
+    getImage(path) {          
+      return require(`../assets/${path}`)
+    },
+    toDate(ms) {
+        let date = new Date(ms)
+        return date.toDateString()
     }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+
+.img-class {
+    height: 10rem;
+    width: 10rem;
+    >img {
+        height: 100%;
+        width: 100%;
+    }
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-  background-color: #ccc;
+.vsa-item {
+    width: 100%;
+}
+.vsa-list {
+    width: 100%;
+    --vsa-max-width: auto;
+    --vsa-min-width: 300px;
+    --vsa-text-color: rgba(55, 55, 55, 1);
+    --vsa-highlight-color: rgb(68, 66, 66); 
+    --vsa-bg-color: rgba(255, 255, 255, 1);
+    --vsa-border-color: rgba(0, 0, 0, 0.2);
+    --vsa-border-width: 1px;
+    --vsa-border-style: solid;
+    --vsa-heading-padding: 1rem 1rem;
+    --vsa-content-padding: 1rem 1rem;
+    --vsa-default-icon-size: 0;
 }
 
-/* Style the collapsible content. Note: hidden by default */
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-}
+
 
 .admin {
     width: 100%;    

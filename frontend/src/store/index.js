@@ -69,6 +69,21 @@ export default new Vuex.Store({
     },
     CreateOrder(state) {
       state.cartList = []
+    },
+    CreateNewProduct(state, data) {
+      if (data.data != null) {
+        state.productList.push(data.data)
+        alert('Product Created!')
+      } else {
+        alert('Product could not be created')
+      }
+    },
+    UpdateProduct(state, data) {
+      if (data.data != null) {
+        alert('Product edited!')
+      } else {
+        alert('Product could not be edited')
+      }
     }
   },
   getters: {
@@ -100,14 +115,18 @@ export default new Vuex.Store({
       context.commit('GetProduct', result)
     },
     async UpdateProduct(context, payload) {
-      await API.UpdateProduct(payload, this.state.userToken)
+      const result = await API.UpdateProduct(payload, this.state.userToken)
+      context.commit('UpdateProduct', result)
+      console.log(result)
     },
     async CreateNewProduct(context, payload) {
       const result = await API.CreateNewProduct(payload, this.state.userToken)
+      context.commit('CreateNewProduct', result)
       console.log(result)
     },
     async DeleteProduct(context, payload) {
-      await API.DeleteProduct(payload, this.state.userToken)
+      const result = await API.DeleteProduct(payload, this.state.userToken)
+      console.log(result)
     },
     async AuthenticateUser(context, payload) {
       const result = await API.AuthenticateUser(payload)

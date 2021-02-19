@@ -36,11 +36,12 @@
                    </div>
                    <div class="right-input">
                         <p>Product Description</p>
-                        <textarea v-model="currentProduct.longDesc"></textarea>
+                        <textarea v-model="currentProduct.longDesc" style="resize: none;"></textarea>
                    </div>
                    <div class="edit-buttons">
-                        <button>Add</button>
-                        <button>Edit</button>
+                        <button @click="submitAdd">Add</button>
+                        <button @click="submitEdit">Edit</button>
+                        <button @click="submitRemove">Remove</button>
                    </div>
                 </div>
             <div class="products">
@@ -104,11 +105,22 @@ export default {
     closePopup() {
       this.currentProduct = null
     },
+    submitAdd() {
+        this.$store.dispatch('CreateNewProduct', this.currentProduct)
+    },
+    submitEdit() {
+        this.$store.dispatch('UpdateProduct', this.currentProduct)
+    },
+     submitRemove() {
+        this.$store.dispatch('DeleteProduct', this.currentProduct)
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+
+
 
 .edit-buttons {
     width: 5rem;
@@ -146,7 +158,7 @@ textarea {
     display: grid;
     grid-template-columns: auto auto auto;
     width: 100%;
-    height: 270px;
+    height: 290px;
     margin-bottom: 10px;
     color: rgba(255,255,255,0.8);
     background-color: #404040;
@@ -208,12 +220,22 @@ textarea {
         text-align: left;
     }
 }
+.product-container {
+    max-width: 5rem;
+    height: 10rem;
+    margin-left: 20px;
+}
 
+.product-card { 
+    height: 100%;
+    
+}
 .products {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 </style>

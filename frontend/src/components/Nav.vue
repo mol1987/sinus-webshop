@@ -20,7 +20,7 @@
             </div>
             <div class="right-side" v-if="NavBarStateAdmin">
                 <router-link to="/AdminProducts" v-bind:class="{activated: flagActivated('/AdminProducts')}">Admin Products</router-link>
-                <router-link to="/Admin" v-bind:class="{activated: flagActivated('/admin')}">Orders</router-link>
+                <router-link to="/Admin" v-bind:class="{activated: flagActivated('/Admin')}">Orders</router-link>
                 <a href="#">My Account</a>
             </div>
             
