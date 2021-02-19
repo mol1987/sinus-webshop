@@ -26,13 +26,6 @@
             </div>
         </div>
         <hr>
-        <!-- <div id="payment-fields">
-          <p>Payment information: </p>
-          <input type="text" id="card-owner" v-model="userData.payment.cardOwner" placeholder="card owner">
-          <input type="text" id="card-number" v-model="userData.payment.cardNumber" placeholder="card number">
-          <input type="text" id="expire-date" v-model="userData.payment.validUntil" placeholder="expire date">
-          <input type="text" id="cvv" v-model="userData.payment.cvv" placeholder="cvv">
-        </div> -->
       </form>
       <div id="btn-div">
           <button @click="registerUser">Register</button>
@@ -63,14 +56,8 @@ export default {
             zip: '',
             city: ''
           },
-        // payment: {
-        //     cardOwner: '',
-        //     cardNumber: '',
-        //     validUntil: '',
-        //     cvv: ''
-        // },
         }, 
-        // *** errors to check each user input field
+        // *** error handler data
         errors: {
           name: false,
           email: false,
@@ -89,12 +76,6 @@ export default {
             zip: '',
             city: ''
           },
-        // payment: {
-        //   cardOwner: '"Johan Kivi"',
-        //   cardNumber: '',
-        //   validUntil: '',
-        //   cvv: ''
-        // },
         }
       }
     },

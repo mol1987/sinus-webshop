@@ -4,8 +4,11 @@
   <div class="login">
     <div id="arrow"></div>
       <form>
+         <p id="errorMsg">{{loginStatus}}</p>
         <input v-model="email" type="text" placeholder="email"/>
+        <p id="errorMsg" v-if="errors.email">Please enter valid email</p>
         <input v-model="password" type="password" placeholder="password"/>
+         <p id="errorMsg" v-if="errors.password">Please enter valid password</p>
       </form>
       <div id="btnDiv">
         <router-link to="/Register" tag="button">Register</router-link>
@@ -20,11 +23,31 @@ export default {
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        errors: {
+          email: false,
+          password: false,
+          validation: ''
+        }
+      }
+    },
+    computed: {
+      inloggedUser() {
+            return this.$store.getters.inloggedUser
+        },
+      loginStatus() {
+        return this.$store.state.loginValidation
       }
     },
     methods: {
       login() {
+        if (this.email == '') {
+          this.errors.email = true
+        }else this.errors.email = false
+        if (this.password == '') {
+          this.errors.password = true
+        }else this.errors.password = false
+
         this.$store.dispatch('AuthenticateUser', {email: this.email, password: this.password} )
       }
     },
@@ -40,7 +63,7 @@ export default {
     background-color: beige;
     border-radius: 15px;
     width: 200px;
-    height: 110px;
+    height: 170px;
     box-shadow: 7px 2px 8px rgba(0, 0, 0, 0.33);
 
     form {
@@ -68,6 +91,9 @@ export default {
         width: 80px;
         margin-top: 15px;
       }
+    }
+    #errorMsg {
+      color: red;
     }
 }
 </style>

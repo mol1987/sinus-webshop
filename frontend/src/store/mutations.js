@@ -6,8 +6,12 @@ export default {
         state.product = data
     },
     AuthenticateUser(state, data) {
+        if (data.user == null) {
+            state.loginValidation = 'Not found'
+        }
         state.userToken = data.token
         state.loggedInUser = data.user
+        console.log('data ',data)
     },
     GetAllOrders(state, data) {
         for (let index = 0; index < data.length; index++) {

@@ -5,13 +5,15 @@
         <div class="container">
             <header id="header"><h1>{{getUser.name}} profile</h1></header>
             <aside id="aside">
+                <h1>Order History</h1><hr>
                 <ul v-for="order in getOrderHistory" :key="order._id">
                     <p>Date: {{toDate(order.timeStamp)}}</p>
                     <li v-for="item in order.items" :key="item._id">
+                        <img :src="getImage(item.imgFile)">
                         {{item.title}}
                         {{item.shortDesc}}
                         {{item.price}} sek
-                    </li>
+                    </li><hr>
                     <hr>
                 </ul>
             </aside>
@@ -62,7 +64,10 @@ export default {
             // let index = strDate.search('GMT')
             // return date.toString().splice(index, strDate.length)
             return date.toDateString()
-        }
+        },
+         getImage(path) {          
+            return require(`../assets/${path}`)
+        },
     },
 }
 </script>
@@ -92,16 +97,41 @@ export default {
             grid-area: header;
             //background-color: hotpink;
             border: 1px solid;
-            padding: 6% 0;
+            padding: 2% 0;
         }
         #aside {
-            grid-area: aside;
-            border: 1px solid;
-            //background-color: hotpink;
+            // grid-area: aside;
+            // border: 1px solid;
+            // //background-color: hotpink;
+            // display: flex;
+            // flex-direction: column;
+            // font-size: 18px;
+            // padding: 40% 20%;
+            justify-content: flex-start;
+            text-align: left;
+            //margin-top: 4rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
-            font-size: 18px;
-            padding: 40% 20%;
+            border-style: solid;
+            height: 700px;
+            width: 500px;
+            background-color: beige;
+            border: none;
+            box-shadow:
+                0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                0 12.5px 10px rgba(0, 0, 0, 0.06),
+                0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+                0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+                0 100px 80px rgba(0, 0, 0, 0.12);
+            overflow-y: auto;
+            li {
+                height: 45px;
+            }
+            img {
+                width: 30px;
+            }
         }
         #body {
             grid-area: body;

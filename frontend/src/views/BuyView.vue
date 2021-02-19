@@ -60,22 +60,22 @@
                     <form>
                         <p>Payment details</p><hr>
                         <label for="fname">Card owner:</label>
-                        <input type="text" id="owner" name="owner">
+                        <input type="text" id="owner" name="owner" v-model="cardOwner">
                         <label for="lname">Card number:</label>
-                        <input type="text" id="card-number" name="card-number">
+                        <input type="text" id="card-number" name="card-number" v-model="cardNumber">
                         <div class="two-inputs">
                             <div id="validation-info">
                                 <label for="validation">Expire date:</label>
-                                <input type="text" id="validation" name="validation">
+                                <input type="text" id="validation" name="validation" v-model="expireDate">
                             </div>
                             <div id="ccv-info">
                                 <label for="ccv">CCV:</label>
-                                <input type="text" id="ccv" name="ccv"> 
+                                <input type="text" id="ccv" name="ccv" v-model="cvv"> 
                             </div>
                         </div>
                     </form>
                     <div id="buttons">
-                        <button @click="GotoPay">Pay Now</button>
+                        <button :disabled="checkVal" @click="GotoPay">Pay Now</button>
                         <button @click="GotoContinueShopping">Continue shopping</button>
                     </div>
                 </div>
@@ -94,32 +94,11 @@ export default {
     },
     data() {
         return {
-            // orderItems: [  
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // },
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // }, 
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // } 
-            // ]
+            cardOwner: '',
+            cardNumber: '',
+            expireDate: '',
+            cvv: '',
+            total: 0
         }
     },
     methods: {
@@ -139,10 +118,21 @@ export default {
             return this.$store.getters.GetCart
         },
         totalPrice() {
-            return this.orderItems.reduce((a, b) => a + (b.price || 0), 0);
+            if (this.orderItems != null) {
+                this.orderItems.forEach(e => {
+                    this.total += e.product.price
+                });
+            }
+            return this.total
         },
         user() {
             return this.$store.getters.inloggedUser
+        },
+        checkVal() {
+            if (this.cardOwner == '' || this.cardNumber == '' || this.expireDate == '' || this.cvv == '') {
+                return true
+            }
+            return false
         }
     }
 
@@ -267,6 +257,10 @@ export default {
         background-color: black;
         color: white;
         margin: 25px;
+    }
+    button:disabled {
+        background-color: lightgrey;
+        color: black;
     }
 }
 

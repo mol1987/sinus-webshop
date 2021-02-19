@@ -39,27 +39,28 @@
                 <div class="input-field">
                         <h3>Your details</h3>
                             <label for="fname">Your name:</label>
-                            <input type="text" id="fname" name="fname">
+                            <input type="text" id="fname" name="fname" v-model="name">
                             <label for="street">Street:</label>
-                            <input type="text" id="street" name="street">
+                            <input type="text" id="street" name="street" v-model="street">
                         <div class="two-inputs">
                             <label for="zip">Zip code:</label>
-                            <input type="text" id="zip" name="zip">
+                            <input type="text" id="zip" name="zip" v-model="zip">
                             <label for="city">City:</label>
-                            <input type="text" id="city" name="city">
+                            <input type="text" id="city" name="city" v-model="city">
                         </div><hr><br>
                         <h3>Payment</h3>
                             <label for="card-owner">Card owner:</label>
-                            <input type="text" id="card-owner" name="card-owner">
+                            <input type="text" id="card-owner" name="card-owner" v-model="cardOwner">
                             <label for="card-number">Card number:</label>
-                            <input type="text" id="card-number" name="card-number">
+                            <input type="text" id="card-number" name="card-number" v-model="cardNumber">
                         <div class="two-inputs">
                             <label for="expire-date">Valid until:</label>
-                            <input type="text" id="expire-date" name="expire-date">
+                            <input type="text" id="expire-date" name="expire-date" v-model="expireDate">
                             <label for="cvv">CVV:</label>
-                            <input type="text" id="cvv" name="cvv"> 
+                            <input type="text" id="cvv" name="cvv" v-model="cvv"> 
                         </div>
-                        <button @click="Order">Submit</button>
+                        <button :disabled="checkVal" @click="Order">Submit</button>
+                        <p>Please all fields to proceed!</p>
                 </div>
             </div>
         </div>
@@ -76,32 +77,15 @@ export default {
     },
     data() {
         return {
-            // orderItems: [  
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // },
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // }, 
-            // {
-            //     _id: '39y7gbbZk1u4ABnv', // generated serverside
-            //     title: 'Gretas Fury',
-            //     price: 999,
-            //     shortDesc: 'Unisex',
-            //     longDesc: 'Skate ipsum dolor sit amet...',
-            //     imgFile: 'skateboard-greta.png' // Asset logic on clientside
-            // } 
-            // ]
+            name: '',
+            street: '',
+            zip: '',
+            city: '',
+            cardOwner: '',
+            cardNumber: '',
+            expireDate: '',
+            cvv: '',
+            total: 0
         }
     },
     computed: {
@@ -109,8 +93,19 @@ export default {
             return this.$store.getters.GetCart
         },
         totalPrice() {
-            return this.orderItems.reduce((a, b) => a + (b.price || 0), 0);
+            if (this.orderItems != null) {
+                this.orderItems.forEach(e => {
+                    this.total += e.product.price
+                });
+            }
+            return this.total
         },
+        checkVal() {
+            if (this.name == '' || this.street == '' || this.zip == '' || this.city == '' || this.cardOwner == '' || this.cardNumber == '' || this.expireDate == '' || this.cvv == '') {
+                return true
+            }
+            return false
+        }
     },
     methods: {
         getImage(path) {
@@ -195,6 +190,10 @@ export default {
             height: 40px;
             width: 130px;
             border-radius: 50px;
+        }
+        button:disabled {
+        background-color: lightgrey;
+        color: black;
         }
     }
 }
