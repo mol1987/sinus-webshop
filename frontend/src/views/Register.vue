@@ -108,10 +108,11 @@ export default {
         }else this.errors.email = false
         if (this.userData.password.length < 3) {
           this.errors.password = true
-        }
+        }else this.errors.password = false
         if (this.userData.repeatPassword !== this.userData.password) {
           this.errors.repeatPassword = true
-        }
+        }else this.errors.repeatPassword = false
+        
         if (this.errors.name == false && this.errors.email == false && this.errors.password == false && this.errors.repeatPassword == false) {
           this.$store.dispatch('RegisterUser', this.userData)
         alert('You have been registered! Thank you!')
