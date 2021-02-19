@@ -27,7 +27,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: beige;
     width: 120px;
     height: 110px;
     margin-right: 45px;
@@ -36,7 +36,7 @@
     #arrow {
         height: 1rem;
         width: 15px;
-        background-color: white;
+        background-color: beige;
         transform: rotate(45deg);
         position: relative;
         bottom: 25%;

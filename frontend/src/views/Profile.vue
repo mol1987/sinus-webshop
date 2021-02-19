@@ -23,10 +23,6 @@
                 <label type="text" name="street" placeholder="street">{{getUser.adress.street}}</label>
                 <label type="number" name="zip" placeholder="zip">{{getUser.adress.zip}}</label>
                 <label type="text" name="city" placeholder="city">{{getUser.adress.city}}</label>
-                <!-- <label type="text" name="cardOwner" placeholder="card owner">{{getUser.payment.cardOwner}}</label>
-                <label type="number" name="cardNumber" placeholder="card number">{{getUser.payment.cardNumber}}</label>
-                <label type="text" name="validUntil" placeholder="expire date">{{getUser.payment.validUntil}}</label>
-                <label type="text" name="cvv" placeholder="cvv">{{getUser.payment.cvv}}</label> -->
             </body>
             </div>
     </main>
@@ -92,21 +88,12 @@ export default {
 
         #header {
             grid-area: header;
-            //background-color: hotpink;
             border: 1px solid;
             padding: 2% 0;
         }
         #aside {
-            // grid-area: aside;
-            // border: 1px solid;
-            // //background-color: hotpink;
-            // display: flex;
-            // flex-direction: column;
-            // font-size: 18px;
-            // padding: 40% 20%;
             justify-content: flex-start;
             text-align: left;
-            //margin-top: 4rem;
             padding: 1rem;
             display: flex;
             flex-direction: column;

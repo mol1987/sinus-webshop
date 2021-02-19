@@ -107,7 +107,6 @@ export default {
         },
         GotoPay() {
             this.$store.dispatch('CreateOrder')
-            // this.$router.push('')
         },
         GotoContinueShopping() {
             this.$router.push('Products')

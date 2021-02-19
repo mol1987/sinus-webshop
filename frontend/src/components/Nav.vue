@@ -49,7 +49,6 @@ export default {
     computed: {
         cartItemAmount() {
             let cart = this.$store.getters.GetCart
-            console.log(cart)
             let amount = 0
             if (cart != null) {
                 cart.forEach(element => {

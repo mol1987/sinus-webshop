@@ -17,10 +17,7 @@
                             <option v-for="(option, index) in imgFiles" v-bind:value="option.value" :key="index">
                                 {{option.text}}
                             </option>
-                                <!-- <option >A</option> -->
-
                         </select> 
-                        <!-- <input type="image"  v-model="currentImage"> -->
                    </div>
                     
                    <div class="middle-input">
@@ -148,6 +145,7 @@ label {
 }
 input {
     background-color: rgba(0,0,0,0);
+    color: rgba(255,255,255,0.7);
     border-style: solid;
 }
 textarea {

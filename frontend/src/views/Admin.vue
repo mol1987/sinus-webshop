@@ -97,7 +97,6 @@ export default {
         orders() {
             let temp = this.$store.getters.GetOrders
             let data = null
-            console.log(temp)
             if (temp.length != null) {
                     data = temp.filter(f => f.status == 'inProcess')
                 }
@@ -106,7 +105,6 @@ export default {
         doneOrders() {
             let temp = this.$store.getters.GetOrders
             let data = null
-            console.log(temp)
             if (temp.length != null) {
                     data = temp.filter(f => f.status == 'done')
                 }
