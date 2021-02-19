@@ -8,9 +8,18 @@
                     <p>IN PROGRESS</p>
                     <div class="line"></div>
                 </div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
+                <div class="box" v-for="order in orders" :key="order._id">
+                    <button type="button" class="collapsible">
+                        <p>{{order.timeStamp}}</p>
+                        <p>{{order.status}}</p>
+                        <p>{{order.orderValue}}</p>
+                    </button>
+                    <div class="content">
+                        <ul v-for="(item, index) in order.items" :key="index">
+                            <li>{{item}}</li> 
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="section">
@@ -18,9 +27,17 @@
                     <p>DONE</p>
                     <div class="line"></div>
                 </div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
+                <div class="box" v-for="order in doneOrders" :key="order._id">
+                    <p>{{order.timeStamp}}</p>
+                    <p>{{order.status}}</p>
+                    <p>{{order.orderValue}}</p>
+                    <ul v-for="(item, index) in order.items" :key="index">
+                       <li>{{item}}</li>
+                       <li>{{item}}</li> 
+                       <li>{{item}}</li>
+                       <li>{{item}}</li>   
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -33,17 +50,66 @@ export default {
     name: "Admin",
     components: {
         Nav
+    },
+    mounted() {
+        this.$store.dispatch('GetAllProducts')
+        this.$store.dispatch('GetAllOrders')
+    },
+    computed: {
+        orders() {
+            let temp = this.$store.getters.GetOrders
+            let data = null
+            console.log(temp)
+            if (temp.length != null) {
+                    data = temp.filter(f => f.status == 'inProcess')
+                }
+            return data
+        },
+        doneOrders() {
+            let temp = this.$store.getters.GetOrders
+            let data = null
+            console.log(temp)
+            if (temp.length != null) {
+                    data = temp.filter(f => f.status == 'done')
+                }
+            return data
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
 .admin {
     width: 100%;    
 }
 .box {
     width: 100%;
-    height: 150px;
+    height: auto;
     margin-bottom: 10px;
 
     background-color: white;

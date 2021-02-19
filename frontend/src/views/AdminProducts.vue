@@ -10,7 +10,17 @@
                 <div class="selected-box">
                     <div class="left-input">
                         <p>Product Photo</p>
-                        <input type="image"  v-model="currentImage">
+                        <div class="img">
+                            <img :src="currentImage">
+                        </div>
+                        <select id="cars" v-model="currentProduct.imgFile" >
+                            <option v-for="(option, index) in imgFiles" v-bind:value="option.value" :key="index">
+                                {{option.text}}
+                            </option>
+                                <!-- <option >A</option> -->
+
+                        </select> 
+                        <!-- <input type="image"  v-model="currentImage"> -->
                    </div>
                     
                    <div class="middle-input">
@@ -28,11 +38,15 @@
                         <p>Product Description</p>
                         <textarea v-model="currentProduct.longDesc"></textarea>
                    </div>
+                   <div class="edit-buttons">
+                        <button>Add</button>
+                        <button>Edit</button>
+                   </div>
                 </div>
             <div class="products">
                 <!-- *** For each object in products display product-card component *** -->
-                <div class="product-container" v-for="product in products" :key="product.id">
-                    <product-card v-on:clicked-card="currentProduct = product" id="product-card"/>
+                <div class="product-container" v-for="product in products" :key="product._id">
+                    <product-card v-on:clicked-card="currentProduct = product" id="product-card" v-bind:product="product"/>
                 </div>
             </div>
            
@@ -43,7 +57,6 @@
 <script>
 import Nav from '@/components/Nav'
 import ProductCard from '../components/ProductCard.vue'
-import Products from '/database/productsSeed.json'
 
 export default {
     name: "AdminProducts",
@@ -54,11 +67,13 @@ export default {
     computed: {
         currentImage() {
             return this.getImage(this.currentProduct.imgFile)
+        },
+        products() {
+            return this.$store.getters.GetProducts
         }
     },
     data() {
     return {
-      products: Products,
       currentProduct:  {
         "title" : "",
         "price" : null,
@@ -68,6 +83,16 @@ export default {
         "imgFile" : "hoodie-ocean.png",
         "serial" : ""
     },
+        imgFiles: [     
+            {text: 'hoodie-ash.png', value: 'hoodie-ash.png' },
+            {text: 'hoodie-fire.png', value: 'hoodie-fire.png' },
+            {text: 'hoodie-ocean.png', value: 'hoodie-ocean.png' },
+            {text: 'skateboard-generic.png', value: 'skateboard-generic.png' },
+            {text: 'skateboard-greta.png', value: 'skateboard-greta.png' },
+            {text: 'wheel-rocket.png', value: 'wheel-rocket.png' },
+            {text: 'wheels-spinner.png', value: 'wheels-spinner.png' },
+            {text: 'wheel-wave.png', value: 'wheel-wave.png' },
+        ]
     }
   },
   methods: {
@@ -84,6 +109,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.edit-buttons {
+    width: 5rem;
+    >button {
+        width: 100%;
+    }
+}
+
+.img {
+    height: 10rem;
+    width: 10rem;
+    >img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+
 .admin-products {
     width: 100%;    
 }
@@ -103,7 +146,7 @@ textarea {
     display: grid;
     grid-template-columns: auto auto auto;
     width: 100%;
-    height: 250px;
+    height: 270px;
     margin-bottom: 10px;
     color: rgba(255,255,255,0.8);
     background-color: #404040;

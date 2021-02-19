@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '@/router'
 import * as API from '@/API'
 
 Vue.use(Vuex)
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     AuthenticateUser(state, data) {
         state.userToken = data.token
         state.loggedInUser = data.user
+        if (data.user.role == 'admin') {
+          router.push('Admin')
+        }
     },
     GetAllOrders(state, data) {
       for (let index = 0; index < data.length; index++) {
@@ -30,7 +34,17 @@ export default new Vuex.Store({
         
         data[index].items.forEach(e => {
             const product = state.productList.find(f => f._id == e)
-            temp.push(product)
+            if (product != null) {
+              temp.push(product)
+            } else {
+              temp.push({
+                title: 'Gretas Fury',
+                price: 999,
+                shortDesc: 'Unisex',
+                longDesc: 'Skate ipsum dolor sit amet...',
+                imgFile: 'skateboard-greta.png' // Asset logic on clientside
+              })
+            }
         })
         data[index].items = temp
       }
